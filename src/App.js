@@ -7,7 +7,9 @@ import card1 from "./images/card-1.jpg";
 import card2 from "./images/card-2.jpg";
 import card3 from "./images/card-3.jpg";
 import card4 from "./images/card-4.jpg";
-import plus from "./images/plus.svg";
+import plus from "./images/button-plus.svg";
+import search from "./images/search.svg";
+import heart from "./images/heart-default.svg";
 
 function App() {
   return (
@@ -49,9 +51,29 @@ function App() {
           </div>
         </header>
         <section className="store">
-          <h2 className="store__title">Все кроссовки</h2>
+          <div className="store__header">
+            <h2 className="store__title">Все кроссовки</h2>
+            <div className="store__search">
+              <img
+                className="store__search-image"
+                src={search}
+                alt="Лупа"
+              ></img>
+              <input
+                className="store__input"
+                type="text"
+                placeholder="Поиск..."
+              ></input>
+            </div>
+          </div>
+
           <ul className="cards-grid">
-          <li className="card">
+            <li className="card">
+              <img
+                className="card__favorite"
+                src={heart}
+                alt="Серое сердце"
+              ></img>
               <img className="card__image" src={card1}></img>
               <p className="card__title">
                 Мужские Кроссовки Nike Blazer Mid Suede
