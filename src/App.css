@@ -155,7 +155,7 @@
 }
 
 .card__price-value {
-  font-weight: bold;
+  font-weight: 700;
   font-size: 14px;
   line-height: 17px;
 }
@@ -181,4 +181,130 @@
   border: 1px solid #f2f2f2;
   box-sizing: border-box;
   border-radius: 8px;
+}
+
+.cart {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  display: none;
+}
+
+.cart__sidebar {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background: #fff;
+  height: 100%;
+  right: 0;
+  bottom: 0;
+  width: 385px;
+  box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.15);
+  padding: 30px;
+}
+
+.cart__title {
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 29px;
+  margin-bottom: 30px;
+}
+
+.cart__items {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #f3f3f3;
+  box-sizing: border-box;
+  border-radius: 20px;
+  padding: 20px 20px 30px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.cart-item__image {
+  display: block;
+  max-width: 80px;
+  object-fit: contain;
+  margin-right: 20px;
+}
+
+.cart-item__remove-button {
+  display: block;
+  opacity: 0.5;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.cart-item__remove-button:hover {
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+.cart-item__text {
+  margin-right: 12px;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.cart-item__title {
+  margin-bottom: 8px;
+}
+
+.cart-item__price {
+  font-weight: 700;
+}
+
+.order-info {
+  font-size: 16px;
+  line-height: 25px;
+  margin-bottom: 24px;
+}
+
+.order-info__content {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.order-info__value {
+  font-weight: 600;
+}
+
+.order-info__dots {
+  align-self: flex-end;
+  flex: 0.9;
+  border-bottom: 1px dashed #dfdfdf;
+  margin: 7px;
+}
+
+.cart__submit-button {
+  outline: none;
+  border: none;
+  padding: 18px;
+  background: #9dd558;
+  border-radius: 18px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.cart__submit-button:hover {
+  background: #aceb60;
+}
+
+.cart__submit-button:active {
+  background: #90c451;
 }
