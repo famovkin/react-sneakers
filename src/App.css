@@ -9,17 +9,21 @@
 }
 
 .page {
-  background: #e7f6ff;
+  min-width: 320px;
   padding-top: 85px;
+  padding-bottom: 40px;
+  height: 100%;
+  background: #e7f6ff;
 }
 
 .page__wrapper {
   max-width: 1080px;
+  width: calc(100% - 100px);
   background: #fff;
   margin: auto;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
   border-radius: 20px;
-  height: 100vh;
+  height: 100%;
 }
 
 .header {
@@ -63,7 +67,7 @@
   font-weight: 600;
   font-size: 14px;
   line-height: 17px;
-  color: #5C5C5C;
+  color: #5c5c5c;
 }
 
 .header__cart {
@@ -73,4 +77,73 @@
 
 .header__cart-image {
   margin-right: 10px;
+}
+
+.store {
+  padding: 40px 60px;
+}
+
+.store__title {
+  margin-bottom: 30px;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 40px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  /* width: 210px; */
+  padding: 20px 30px 30px;
+  background: #fff;
+  border: 1px solid #f3f3f3;
+  box-sizing: border-box;
+  border-radius: 40px;
+}
+
+.card__title {
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.card__price-title {
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  text-transform: uppercase;
+  color: #bdbdbd;
+}
+
+.card__price-value {
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.card__image {
+  display: block;
+  width: 100%;
+}
+
+.card__buy {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card__add-button {
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  color: transparent;
+  background: #ffffff;
+  border: 1px solid #f2f2f2;
+  box-sizing: border-box;
+  border-radius: 8px;
 }
