@@ -176,13 +176,9 @@
 
 .card__add-button {
   cursor: pointer;
-  width: 32px;
-  height: 32px;
   color: transparent;
-  background: #ffffff;
-  border: 1px solid #f2f2f2;
-  box-sizing: border-box;
-  border-radius: 8px;
+  background: transparent;
+  border: none;
 }
 
 .cart {

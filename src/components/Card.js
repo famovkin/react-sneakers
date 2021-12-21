@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import plus from "../images/button-plus.svg";
+import plusAdded from "../images/button-added.svg";
 import heart from "../images/heart-default.svg";
 
 function Card({ title, price, img }) {
+  const [isAdded, setIsAdded] = useState(false);
+
+  const plusHandler = () => {
+    setIsAdded((prevState) => !prevState);
+  };
+
   return (
     <li className="card">
       <img className="card__favorite" src={heart} alt="Серое сердце"></img>
@@ -14,7 +21,11 @@ function Card({ title, price, img }) {
           <p className="card__price-value">{price} руб.</p>
         </div>
         <button className="card__add-button">
-          <img className="card__add-button-image" src={plus}></img>
+          <img
+            onClick={plusHandler}
+            className="card__add-button-image"
+            src={isAdded ? plusAdded : plus}
+          ></img>
         </button>
       </div>
     </li>
