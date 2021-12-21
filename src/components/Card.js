@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import plus from "../images/button-plus.svg";
 import plusAdded from "../images/button-added.svg";
-import heart from "../images/heart-default.svg";
+import heartDefault from "../images/heart-default.svg";
+import heartLiked from "../images/heart-liked.svg";
 
 function Card({ title, price, img }) {
   const [isAdded, setIsAdded] = useState(false);
@@ -12,7 +13,7 @@ function Card({ title, price, img }) {
 
   return (
     <li className="card">
-      <img className="card__favorite" src={heart} alt="Серое сердце"></img>
+      <img className="card__favorite" src={heartDefault} alt="Серое сердце"></img>
       <img className="card__image" src={img} alt={title}></img>
       <p className="card__title">{title}</p>
       <div className="card__buy">
