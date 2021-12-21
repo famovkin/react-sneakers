@@ -12,7 +12,7 @@ import CardList from "./components/CardList";
 import remove_button from "./images/remove-button.svg";
 import React, { useState, useMemo } from "react";
 import CardSearch from "./components/CardSearch";
-import Header from "./components/Header"
+import Header from "./components/Header";
 
 function App() {
   const sneakers = [
@@ -73,6 +73,7 @@ function App() {
   ];
 
   const [search, setSearch] = useState("");
+  const [cartOpen, setCartOpen] = useState(false);
 
   const searchedCards = useMemo(() => {
     return sneakers.filter((card) =>
@@ -80,11 +81,27 @@ function App() {
     );
   }, [search, sneakers]);
 
+  const cartOpenHandler = () => {
+    setCartOpen(true);
+  };
+
+  const cartCloseHandler = () => {
+    setCartOpen(false);
+  };
+
   return (
     <div className="page">
-      <div className="cart">
+      <div className={`cart ${cartOpen && "cart_opened"}`}>
         <div className="cart__sidebar">
-          <h2 className="cart__title">Корзина</h2>
+          <div className="cart__header">
+            <h2 className="cart__title">Корзина</h2>
+            <img
+              onClick={cartCloseHandler}
+              className="cart-item__remove-button"
+              src={remove_button}
+              alt="Крестик"
+            ></img>
+          </div>
           <ul className="cart__items">
             <li className="cart-item">
               <img className="cart-item__image" src={card2} alt="#"></img>
@@ -131,7 +148,7 @@ function App() {
         </div>
       </div>
       <div className="page__wrapper">
-        <Header />
+        <Header onClickCart={cartOpenHandler} />
         <section className="store">
           <div className="store__header">
             <h2 className="store__title">Все кроссовки</h2>

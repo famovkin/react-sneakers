@@ -74,6 +74,7 @@
 .header__cart {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .header__cart-image {
@@ -192,6 +193,10 @@
   display: none;
 }
 
+.cart_opened {
+  display: block;
+}
+
 .cart__sidebar {
   display: flex;
   flex-direction: column;
@@ -205,11 +210,18 @@
   padding: 30px;
 }
 
+.cart__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
 .cart__title {
   font-weight: bold;
   font-size: 24px;
   line-height: 29px;
-  margin-bottom: 30px;
 }
 
 .cart__items {

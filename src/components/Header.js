@@ -4,7 +4,7 @@ import cart from "../images/cart.svg";
 import favorite from "../images/favorite.svg";
 import profile from "../images/profile.svg";
 
-function Header() {
+function Header({ onClickCart }) {
   return (
     <header className="header">
       <div className="header__content">
@@ -16,7 +16,7 @@ function Header() {
           </div>
         </div>
         <ul className="header__account">
-          <li className="header__cart">
+          <li onClick={onClickCart} className="header__cart">
             <img className="header__cart-image" src={cart} alt="Корзина"></img>
             <span className="header__price">1205 руб.</span>
           </li>
