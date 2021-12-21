@@ -1,8 +1,4 @@
 import "./App.css";
-import logo from "./images/logo.png";
-import cart from "./images/cart.svg";
-import favorite from "./images/favorite.svg";
-import profile from "./images/profile.svg";
 import card1 from "./images/card-1.jpg";
 import card2 from "./images/card-2.jpg";
 import card3 from "./images/card-3.jpg";
@@ -16,6 +12,7 @@ import CardList from "./components/CardList";
 import remove_button from "./images/remove-button.svg";
 import React, { useState, useMemo } from "react";
 import CardSearch from "./components/CardSearch";
+import Header from "./components/Header"
 
 function App() {
   const sneakers = [
@@ -134,41 +131,7 @@ function App() {
         </div>
       </div>
       <div className="page__wrapper">
-        <header className="header">
-          <div className="header__content">
-            <div className="header__logo">
-              <img className="logo" src={logo} alt="Кроссовки"></img>
-              <div className="header__logo-text">
-                <h1 className="header__title">React Sneakers</h1>
-                <p className="header__subtitle">Магазин лучших кроссовок</p>
-              </div>
-            </div>
-            <ul className="header__account">
-              <li className="header__cart">
-                <img
-                  className="header__cart-image"
-                  src={cart}
-                  alt="Корзина"
-                ></img>
-                <span className="header__price">1205 руб.</span>
-              </li>
-              <li>
-                <img
-                  className="header__favorite"
-                  src={favorite}
-                  alt="Сердце"
-                ></img>
-              </li>
-              <li>
-                <img
-                  className="header__profile"
-                  src={profile}
-                  atl="Человек"
-                ></img>
-              </li>
-            </ul>
-          </div>
-        </header>
+        <Header />
         <section className="store">
           <div className="store__header">
             <h2 className="store__title">Все кроссовки</h2>
