@@ -75,6 +75,11 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.header__cart:hover {
+  transform: scale(1.1);
 }
 
 .header__cart-image {
