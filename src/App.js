@@ -12,9 +12,10 @@ import card6 from "./images/card-6.jpg";
 import card7 from "./images/card-7.jpg";
 import card8 from "./images/card-8.jpg";
 import card9 from "./images/card-9.jpg";
-import search from "./images/search.svg";
-import Card from "./components/Card";
+import CardList from "./components/CardList";
 import remove_button from "./images/remove-button.svg";
+import React, { useState, useMemo } from "react";
+import CardSearch from "./components/CardSearch";
 
 function App() {
   const sneakers = [
@@ -73,6 +74,14 @@ function App() {
       img: card9,
     },
   ];
+
+  const [search, setSearch] = useState("");
+
+  const searchedCards = useMemo(() => {
+    return sneakers.filter((card) =>
+      card.title.toLowerCase().includes(search.toLowerCase())
+    );
+  }, [search, sneakers]);
 
   return (
     <div className="page">
@@ -163,30 +172,9 @@ function App() {
         <section className="store">
           <div className="store__header">
             <h2 className="store__title">Все кроссовки</h2>
-            <div className="store__search">
-              <img
-                className="store__search-image"
-                src={search}
-                alt="Лупа"
-              ></img>
-              <input
-                className="store__input"
-                type="text"
-                placeholder="Поиск..."
-              ></input>
-            </div>
+            <CardSearch search={search} setSearch={setSearch} />
           </div>
-
-          <ul className="cards-grid">
-            {sneakers.map((item) => (
-              <Card
-                key={item.id}
-                title={item.title}
-                price={item.price}
-                img={item.img}
-              />
-            ))}
-          </ul>
+          <CardList cards={searchedCards} />
         </section>
       </div>
     </div>
