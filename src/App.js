@@ -62,10 +62,16 @@ function App() {
         <Header onClickCart={cartOpenHandler} />
         <section className="store">
           <div className="store__header">
-            <h2 className="store__title">Все кроссовки</h2>
+            <h2 className="store__title">
+              {search ? `Поиск по запросу: ${search}` : "Все кроссовки"}
+            </h2>
             <CardSearch search={search} setSearch={setSearch} />
           </div>
-          <CardList cards={searchedCards} onPlus={onPlusClick} />
+          {searchedCards.length ? (
+            <CardList cards={searchedCards} onPlus={onPlusClick} />
+          ) : (
+            <h3 className="store__search-result">Нет результатов</h3>
+          )}
         </section>
       </div>
     </div>

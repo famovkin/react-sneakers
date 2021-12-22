@@ -24,7 +24,7 @@
   margin: auto;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
   border-radius: 20px;
-  min-height: 75vh;
+  min-height: 83vh;
 }
 
 .header {
@@ -113,7 +113,7 @@
   border: 1px solid #f3f3f3;
   box-sizing: border-box;
   border-radius: 10px;
-  padding: 13px 18px;
+  padding: 10px 15px;
   max-width: 250px;
 }
 
@@ -123,6 +123,12 @@
   width: 100%;
   font-size: 14px;
   line-height: 17px;
+}
+
+.store__search-result {
+  padding-top: 60px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .cards-grid {
@@ -270,6 +276,11 @@
 .cart-item__remove-button:hover {
   opacity: 1;
   transform: scale(1.08);
+}
+
+.cart-item__remove-button_type_input {
+  width: 25px;
+  opacity: 0.8;
 }
 
 .cart-item__text {

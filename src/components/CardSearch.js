@@ -1,5 +1,6 @@
 import React from "react";
 import searchImg from "../images/search.svg";
+import remove_button from "../images/remove-button.svg";
 
 function CardSeacrh({ search, setSearch }) {
   return (
@@ -12,6 +13,12 @@ function CardSeacrh({ search, setSearch }) {
         type="text"
         placeholder="Поиск..."
       ></input>
+      <img
+        onClick={() => setSearch("")}
+        className="cart-item__remove-button cart-item__remove-button_type_input"
+        src={remove_button}
+        alt="Крестик"
+      ></img>
     </div>
   );
 }
