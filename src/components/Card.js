@@ -7,11 +7,12 @@ import { api } from "../utils/Api";
 
 function Card(props) {
   const [isAdded, setIsAdded] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const plusHandler = () => {
     if (!isAdded) {
       api
-        .addItemToCart(props)
+        .addItem(props, "cart")
         .then((response) => {
           props.onPlus(response);
           setIsAdded(true);
@@ -20,11 +21,24 @@ function Card(props) {
     }
   };
 
+  const favoriteHandler = () => {
+    if (!isFavorite) {
+      api
+        .addItem(props, "favorites")
+        .then((response) => {
+          props.onFavorite(response);
+          setIsFavorite(!isFavorite);
+        })
+        .catch((error) => console.log(error));
+    }
+  };
+
   return (
     <li className="card">
       <img
+        onClick={favoriteHandler}
         className="card__favorite"
-        src={heartDefault}
+        src={isFavorite ? heartLiked : heartDefault}
         alt="Серое сердце"
       ></img>
       <img className="card__image" src={props.imgUrl} alt={props.title}></img>

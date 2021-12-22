@@ -9,6 +9,7 @@ import { api } from "./utils/Api";
 function App() {
   const [sneakers, setSneakers] = useState([]);
   const [cartSneakers, setCartSneakers] = useState([]);
+  const [favorites, setFavotites] = useState([]);
   const [search, setSearch] = useState("");
   const [cartOpen, setCartOpen] = useState(false);
 
@@ -56,6 +57,10 @@ function App() {
     setCartSneakers((prev) => [...prev, cardData]);
   };
 
+  const onFavoriteClick = (cardData) => {
+    setFavotites((prev) => [...prev, cardData]);
+  };
+
   return (
     <div className="page">
       {cartOpen && (
@@ -76,7 +81,11 @@ function App() {
             <CardSearch search={search} setSearch={setSearch} />
           </div>
           {searchedCards.length ? (
-            <CardList cards={searchedCards} onPlus={onPlusClick} />
+            <CardList
+              cards={searchedCards}
+              onPlus={onPlusClick}
+              onFavorite={onFavoriteClick}
+            />
           ) : (
             <h3 className="store__search-result">Нет результатов</h3>
           )}

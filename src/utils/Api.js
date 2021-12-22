@@ -19,8 +19,8 @@ class Api {
       });
   }
 
-  addItemToCart(newItem) {
-    return fetch(`${this._baseUrl}cart`, {
+  addItem(newItem, endpoint) {
+    return fetch(`${this._baseUrl}${endpoint}`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({

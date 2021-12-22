@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "./Card";
 
-function CardList({ cards, onPlus }) {
+function CardList({ cards, onPlus, onFavorite }) {
   return (
     <ul className="cards-grid">
       {cards.map((card) => (
@@ -11,6 +11,7 @@ function CardList({ cards, onPlus }) {
           price={card.price}
           imgUrl={card.imgUrl}
           onPlus={onPlus}
+          onFavorite={onFavorite}
         />
       ))}
     </ul>
