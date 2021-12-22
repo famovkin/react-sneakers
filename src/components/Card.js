@@ -10,10 +10,13 @@ function Card(props) {
 
   const plusHandler = () => {
     if (!isAdded) {
-      api.addItemToCart(props).then(() => {
-        props.onPlus();
-        setIsAdded(true);
-      });
+      api
+        .addItemToCart(props)
+        .then((response) => {
+          props.onPlus(response);
+          setIsAdded(true);
+        })
+        .catch((error) => console.log(error));
     }
   };
 

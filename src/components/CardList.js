@@ -10,7 +10,7 @@ function CardList({ cards, onPlus }) {
           title={card.title}
           price={card.price}
           imgUrl={card.imgUrl}
-          onPlus={() => onPlus(card)}
+          onPlus={onPlus}
         />
       ))}
     </ul>

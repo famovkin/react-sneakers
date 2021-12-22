@@ -319,7 +319,7 @@
   margin: 7px;
 }
 
-.cart__submit-button {
+.button {
   outline: none;
   border: none;
   padding: 18px;
@@ -333,10 +333,36 @@
   transition: all 0.2s ease-in-out;
 }
 
-.cart__submit-button:hover {
+.button:hover {
   background: #41d95d;
 }
 
-.cart__submit-button:active {
+.button:active {
   background: #34ad4a;
+}
+
+.cart__message {
+  text-align: center;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cart__message-image {
+  margin-bottom: 10px;
+}
+
+.cart__message-title {
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 27px;
+  margin-bottom: 5px;
+}
+
+.cart__message-subtitle {
+  font-size: 16px;
+  line-height: 24px;
+  opacity: 0.4;
+  margin-bottom: 20px;
 }
