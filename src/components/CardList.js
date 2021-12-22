@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "./Card";
 
-function CardList({ cards }) {
+function CardList({ cards, onPlus }) {
   return (
     <ul className="cards-grid">
       {cards.map((card) => (
@@ -10,6 +10,7 @@ function CardList({ cards }) {
           title={card.title}
           price={card.price}
           imgUrl={card.imgUrl}
+          onPlus={() => onPlus(card)}
         />
       ))}
     </ul>

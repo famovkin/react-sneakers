@@ -7,6 +7,7 @@ import Cart from "./components/Cart";
 
 function App() {
   const [sneakers, setSneakers] = useState([]);
+  const [cartSneakers, setCartSneakers] = useState([]);
   const [search, setSearch] = useState("");
   const [cartOpen, setCartOpen] = useState(false);
 
@@ -20,7 +21,7 @@ function App() {
       })
       .then((response) => {
         setSneakers(response);
-        console.log(response);
+        // console.log(response);
       });
   }, []);
 
@@ -38,9 +39,15 @@ function App() {
     setCartOpen(false);
   };
 
+  const onPlusClick = (cardData) => {
+    setCartSneakers((prev) => [...prev, cardData]);
+  };
+
   return (
     <div className="page">
-      {cartOpen && <Cart onClose={cartCloseHandler} />}
+      {cartOpen && (
+        <Cart onClose={cartCloseHandler} cartSneakers={cartSneakers} />
+      )}
       <div className="page__wrapper">
         <Header onClickCart={cartOpenHandler} />
         <section className="store">
@@ -48,7 +55,7 @@ function App() {
             <h2 className="store__title">Все кроссовки</h2>
             <CardSearch search={search} setSearch={setSearch} />
           </div>
-          <CardList cards={searchedCards} />
+          <CardList cards={searchedCards} onPlus={onPlusClick} />
         </section>
       </div>
     </div>

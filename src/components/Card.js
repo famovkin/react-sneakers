@@ -4,11 +4,14 @@ import plusAdded from "../images/button-added.svg";
 import heartDefault from "../images/heart-default.svg";
 import heartLiked from "../images/heart-liked.svg";
 
-function Card({ title, price, imgUrl }) {
+function Card(props) {
   const [isAdded, setIsAdded] = useState(false);
 
   const plusHandler = () => {
-    setIsAdded((prevState) => !prevState);
+    if (!isAdded) {
+      setIsAdded(true);
+      props.onPlus();
+    }
   };
 
   return (
@@ -18,12 +21,12 @@ function Card({ title, price, imgUrl }) {
         src={heartDefault}
         alt="Серое сердце"
       ></img>
-      <img className="card__image" src={imgUrl} alt={title}></img>
-      <p className="card__title">{title}</p>
+      <img className="card__image" src={props.imgUrl} alt={props.title}></img>
+      <p className="card__title">{props.title}</p>
       <div className="card__buy">
         <div className="card__price">
           <p className="card__price-title">Цена:</p>
-          <p className="card__price-value">{price} руб.</p>
+          <p className="card__price-value">{props.price} руб.</p>
         </div>
         <button className="card__add-button">
           <img

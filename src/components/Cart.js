@@ -1,7 +1,9 @@
 import React from "react";
-import remove_button from "../images/remove-button.svg";
+import remove_button from "../images/remove-button-colored.svg";
 
-function Cart({ onClose }) {
+function Cart({ onClose, cartSneakers }) {
+  console.log(cartSneakers);
+
   return (
     <div className="cart">
       <div className="cart__sidebar">
@@ -15,34 +17,24 @@ function Cart({ onClose }) {
           ></img>
         </div>
         <ul className="cart__items">
-          <li className="cart-item">
-            <img className="cart-item__image" src={'./images/card-2.jpg'} alt="#"></img>
-            <div className="cart-item__text">
-              <p className="cart-item__title">
-                Мужские Кроссовки Nike Air Max 270
-              </p>
-              <p className="cart-item__price">12 999 руб.</p>
-            </div>
-            <img
-              className="cart-item__remove-button"
-              src={remove_button}
-              alt="Крестик"
-            ></img>
-          </li>
-          <li className="cart-item">
-            <img className="cart-item__image" src={'./images/card-4.jpg'} alt="#"></img>
-            <div className="cart-item__text">
-              <p className="cart-item__title">
-                Мужские Кроссовки Nike Air Max 270
-              </p>
-              <p className="cart-item__price">8 499 руб.</p>
-            </div>
-            <img
-              className="cart-item__remove-button"
-              src={remove_button}
-              alt="Крестик"
-            ></img>
-          </li>
+          {cartSneakers.map((sneaker) => (
+            <li key={sneaker.id} className="cart-item">
+              <img
+                className="cart-item__image"
+                src={sneaker.imgUrl}
+                alt={sneaker.title}
+              ></img>
+              <div className="cart-item__text">
+                <p className="cart-item__title">{sneaker.title}</p>
+                <p className="cart-item__price">{sneaker.price} руб.</p>
+              </div>
+              <img
+                className="cart-item__remove-button"
+                src={remove_button}
+                alt="Крестик"
+              ></img>
+            </li>
+          ))}
         </ul>
         <ul className="order-info">
           <li className="order-info__content">
