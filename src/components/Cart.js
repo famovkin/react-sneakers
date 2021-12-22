@@ -1,7 +1,5 @@
 import React from "react";
 import remove_button from "../images/remove-button.svg";
-import card2 from "../images/card-2.jpg"; // хардкод
-import card4 from "../images/card-4.jpg"; // хардкод
 
 function Cart({ onClose }) {
   return (
@@ -18,7 +16,7 @@ function Cart({ onClose }) {
         </div>
         <ul className="cart__items">
           <li className="cart-item">
-            <img className="cart-item__image" src={card2} alt="#"></img>
+            <img className="cart-item__image" src={'./images/card-2.jpg'} alt="#"></img>
             <div className="cart-item__text">
               <p className="cart-item__title">
                 Мужские Кроссовки Nike Air Max 270
@@ -32,7 +30,7 @@ function Cart({ onClose }) {
             ></img>
           </li>
           <li className="cart-item">
-            <img className="cart-item__image" src={card4} alt="#"></img>
+            <img className="cart-item__image" src={'./images/card-4.jpg'} alt="#"></img>
             <div className="cart-item__text">
               <p className="cart-item__title">
                 Мужские Кроссовки Nike Air Max 270

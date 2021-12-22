@@ -9,7 +9,7 @@ function CardList({ cards }) {
           key={card.id}
           title={card.title}
           price={card.price}
-          img={card.img}
+          imgUrl={card.imgUrl}
         />
       ))}
     </ul>
