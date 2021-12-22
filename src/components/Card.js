@@ -3,14 +3,17 @@ import plus from "../images/button-plus.svg";
 import plusAdded from "../images/button-added.svg";
 import heartDefault from "../images/heart-default.svg";
 import heartLiked from "../images/heart-liked.svg";
+import { api } from "../utils/Api";
 
 function Card(props) {
   const [isAdded, setIsAdded] = useState(false);
 
   const plusHandler = () => {
     if (!isAdded) {
-      props.onPlus();
-      setIsAdded(true);
+      api.addItemToCart(props).then(() => {
+        props.onPlus();
+        setIsAdded(true);
+      });
     }
   };
 

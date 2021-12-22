@@ -4,6 +4,7 @@ import React, { useState, useMemo, useEffect } from "react";
 import CardSearch from "./components/CardSearch";
 import Header from "./components/Header";
 import Cart from "./components/Cart";
+import { api } from "./utils/Api";
 
 function App() {
   const [sneakers, setSneakers] = useState([]);
@@ -12,18 +13,30 @@ function App() {
   const [cartOpen, setCartOpen] = useState(false);
 
   useEffect(() => {
-    fetch("https://61c25977de977000179b5481.mockapi.io/items")
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        return Promise.reject("Что-то пошло не так :(");
-      })
+    api
+      .getInitialItems("items")
       .then((response) => {
         setSneakers(response);
-        // console.log(response);
-      });
+      })
+      .catch((error) => console.log(error));
+    api
+      .getInitialItems("cart")
+      .then((response) => {
+        setCartSneakers(response);
+      })
+      .catch((error) => console.log(error));
   }, []);
+
+  const cartRemoveHandler = (deletedSneaker) => {
+    api
+      .removeItemFromCart(deletedSneaker.id)
+      .then(() => {
+        setCartSneakers((state) =>
+          state.filter((sneaker) => sneaker.id !== deletedSneaker.id)
+        );
+      })
+      .catch((error) => console.log(error));
+  };
 
   const searchedCards = useMemo(() => {
     return sneakers.filter((card) =>
@@ -39,12 +52,6 @@ function App() {
     setCartOpen(false);
   };
 
-  const cartRemoveHandler = (deletedSneaker) => {
-    setCartSneakers((state) =>
-      state.filter((sneaker) => sneaker.id !== deletedSneaker.id)
-    );
-  };
-
   const onPlusClick = (cardData) => {
     setCartSneakers((prev) => [...prev, cardData]);
   };
@@ -53,6 +60,7 @@ function App() {
     <div className="page">
       {cartOpen && (
         <Cart
+          setCartSneakers={setCartSneakers}
           onClose={cartCloseHandler}
           cartSneakers={cartSneakers}
           onRemove={cartRemoveHandler}

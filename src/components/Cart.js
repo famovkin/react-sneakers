@@ -2,13 +2,6 @@ import React from "react";
 import remove_button from "../images/remove-button-colored.svg";
 
 function Cart({ onClose, cartSneakers, onRemove }) {
-  console.log(cartSneakers);
-
-  const removeSneaker = (sneaker) => {
-    console.log(sneaker);
-    onRemove(sneaker);
-  };
-
   return (
     <div className="cart">
       <div className="cart__sidebar">
@@ -34,7 +27,7 @@ function Cart({ onClose, cartSneakers, onRemove }) {
                 <p className="cart-item__price">{sneaker.price} руб.</p>
               </div>
               <img
-                onClick={() => removeSneaker(sneaker)}
+                onClick={() => onRemove(sneaker)}
                 className="cart-item__remove-button"
                 src={remove_button}
                 alt="Крестик"
