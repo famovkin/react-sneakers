@@ -9,8 +9,8 @@ function Card(props) {
 
   const plusHandler = () => {
     if (!isAdded) {
-      setIsAdded(true);
       props.onPlus();
+      setIsAdded(true);
     }
   };
 

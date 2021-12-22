@@ -39,6 +39,12 @@ function App() {
     setCartOpen(false);
   };
 
+  const cartRemoveHandler = (deletedSneaker) => {
+    setCartSneakers((state) =>
+      state.filter((sneaker) => sneaker.id !== deletedSneaker.id)
+    );
+  };
+
   const onPlusClick = (cardData) => {
     setCartSneakers((prev) => [...prev, cardData]);
   };
@@ -46,7 +52,11 @@ function App() {
   return (
     <div className="page">
       {cartOpen && (
-        <Cart onClose={cartCloseHandler} cartSneakers={cartSneakers} />
+        <Cart
+          onClose={cartCloseHandler}
+          cartSneakers={cartSneakers}
+          onRemove={cartRemoveHandler}
+        />
       )}
       <div className="page__wrapper">
         <Header onClickCart={cartOpenHandler} />
