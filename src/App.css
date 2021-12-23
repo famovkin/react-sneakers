@@ -8,11 +8,16 @@
   list-style: none;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .page {
   min-width: 320px;
   min-height: 100vh;
-  padding-top: 85px;
-  padding-bottom: 40px;
+  padding-top: 35px;
+  padding-bottom: 35px;
   height: 100%;
   background: #e7f6ff;
 }
@@ -106,6 +111,15 @@
   margin-bottom: 30px;
 }
 
+.store__title {
+  display: block;
+  width: 600px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  align-self: center;
+}
+
 .store__search {
   display: flex;
   align-items: center;
@@ -139,9 +153,7 @@
 }
 
 .card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  height: 300px;
   gap: 14px;
   width: 200px;
   padding: 20px 30px 30px;
@@ -168,6 +180,8 @@
 .card__title {
   font-size: 14px;
   line-height: 17px;
+  height: 50px;
+  margin-bottom: 14px;
 }
 
 .card__price-title {
@@ -187,6 +201,7 @@
 .card__image {
   display: block;
   width: 100%;
+  margin-bottom: 14px;
 }
 
 .card__buy {
