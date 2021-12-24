@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
+import ContentLoader from "react-content-loader";
 import plusAdded from "../images/button-added.svg";
-import plus from "../images/button-plus.svg";
+import plusDefault from "../images/button-plus.svg";
 import heartDefault from "../images/heart-default.svg";
 import heartLiked from "../images/heart-liked.svg";
-import { api } from "../utils/Api";
-import ContentLoader from "react-content-loader";
 
 function Card({
   card,
@@ -12,19 +11,11 @@ function Card({
   onAddToFavorites,
   isOnFavoritesPage = false,
   isOnFavorites,
+  isOnCart,
   isLoading,
 }) {
-  const [isAdded, setIsAdded] = useState(card.isOnCart);
-  const plusHandler = () => {
-    if (!isAdded) {
-      api
-        .addItem(card, "cart")
-        .then((response) => {
-          onAddToCart(response);
-          setIsAdded(true);
-        })
-        .catch((error) => console.log(error));
-    }
+  const cartHandler = () => {
+    onAddToCart(card);
   };
 
   const favoriteHandler = () => {
@@ -69,9 +60,9 @@ function Card({
             </div>
             <button className="card__add-button">
               <img
-                onClick={plusHandler}
+                onClick={cartHandler}
                 className="card__add-button-image"
-                src={isAdded ? plusAdded : plus}
+                src={isOnCart ? plusAdded : plusDefault}
               ></img>
             </button>
           </div>

@@ -9,6 +9,7 @@ function Home({
   onAddToCart,
   onAddToFavorites,
   favoriteItems,
+  cartItems,
   isLoading,
 }) {
   const emptyArray = [{}, {}, {}, {}, {}, {}, {}, {}];
@@ -29,6 +30,7 @@ function Home({
             onAddToCart={onAddToCart}
             onAddToFavorites={onAddToFavorites}
             favoriteItems={favoriteItems}
+            cartItems={cartItems}
             isLoading={isLoading}
           />
         )}

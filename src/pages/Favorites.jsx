@@ -3,6 +3,7 @@ import Card from "../components/Card";
 
 function Favorites({
   favoriteItems,
+  cartItems,
   onAddToCart,
   onAddToFavorites,
   isOnFavoritesPage,
@@ -18,9 +19,12 @@ function Favorites({
             <Card
               key={card.id}
               card={card}
-              onPlus={onAddToCart}
+              onAddToCart={onAddToCart}
               onAddToFavorites={onAddToFavorites}
               isOnFavoritesPage={isOnFavoritesPage}
+              isOnCart={cartItems.some(
+                (item) => item.customId === card.customId
+              )}
             />
           ))
         ) : (

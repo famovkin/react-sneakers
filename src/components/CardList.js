@@ -6,6 +6,7 @@ function CardList({
   onAddToCart,
   onAddToFavorites,
   favoriteItems,
+  cartItems,
   isLoading,
 }) {
   return (
@@ -20,6 +21,7 @@ function CardList({
             (item) => item.customId === card.customId
           )}
           isLoading={isLoading}
+          isOnCart={cartItems.some((item) => item.customId === card.customId)}
         />
       ))}
     </ul>

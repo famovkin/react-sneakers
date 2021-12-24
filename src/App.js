@@ -73,17 +73,10 @@ function App() {
     setIsCartOpened(false);
   };
 
-  const onAddToCart = (clickedCard) => {
-    setCartItems((prev) => [...prev, clickedCard]);
-  };
-
   const onAddToFavorites = (clickedCard) => {
     const indexInFavorites = favoriteItems.findIndex(
       (card) => card.customId === clickedCard.customId
     );
-    // const indexInStore = items.findIndex(
-    //   (card) => card.customId === clickedCard.customId
-    // );
 
     if (favoriteItems.find((card) => card.customId === clickedCard.customId)) {
       api
@@ -94,17 +87,6 @@ function App() {
           );
         })
         .catch((error) => console.log(error));
-      // api
-      //   .changeStatus(items[indexInStore].id, "items", false)
-      //   .then(() => {
-      //     api
-      //       .getInitialItems("items")
-      //       .then((response) => {
-      //         setItems(response);
-      //       })
-      //       .catch((error) => console.log(error));
-      //   })
-      //   .catch((error) => console.log(error));
     } else {
       api
         .addItem(clickedCard, "favorites")
@@ -112,17 +94,29 @@ function App() {
           setFavoriteItems((prev) => [...prev, response]);
         })
         .catch((error) => console.log(error));
-      // api
-      //   .changeStatus(clickedCard.id, "items", true)
-      //   .then(() => {
-      //     api
-      //       .getInitialItems("items")
-      //       .then((response) => {
-      //         setItems(response);
-      //       })
-      //       .catch((error) => console.log(error));
-      //   })
-      //   .catch((error) => console.log(error));
+    }
+  };
+
+  const onAddToCart = (clickedCard) => {
+    const indexInCart = cartItems.findIndex(
+      (card) => card.customId === clickedCard.customId
+    );
+    if (cartItems.find((card) => card.customId === clickedCard.customId)) {
+      api
+        .removeItem(cartItems[indexInCart].id, "cart")
+        .then(() => {
+          setCartItems((state) =>
+            state.filter((card) => card.customId !== clickedCard.customId)
+          );
+        })
+        .catch((error) => console.log(error));
+    } else {
+      api
+        .addItem(clickedCard, "cart")
+        .then((response) => {
+          setCartItems((prev) => [...prev, response]);
+        })
+        .catch((error) => console.log(error));
     }
   };
 
@@ -146,12 +140,14 @@ function App() {
               onAddToCart={onAddToCart}
               onAddToFavorites={onAddToFavorites}
               favoriteItems={favoriteItems}
+              cartItems={cartItems}
               isLoading={isLoading}
             />
           </Route>
           <Route path="/favorites" exact>
             <Favorites
               favoriteItems={favoriteItems}
+              cartItems={cartItems}
               onAddToCart={onAddToCart}
               onAddToFavorites={onAddToFavorites}
               isOnFavoritesPage={true}
