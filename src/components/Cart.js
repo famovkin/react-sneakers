@@ -1,9 +1,9 @@
 import React from "react";
+import empty_box from "../images/empty-box.jpg";
 import remove_button from "../images/remove-button-colored.svg";
 import CartMessage from "./CartMessage";
-import empty_box from "../images/empty-box.jpg";
 
-function Cart({ onClose, cartSneakers, onRemove }) {
+function Cart({ cartItems, onClose, onRemoveItem }) {
   return (
     <div className="cart">
       <div className="cart__sidebar">
@@ -16,10 +16,10 @@ function Cart({ onClose, cartSneakers, onRemove }) {
             alt="Крестик"
           ></img>
         </div>
-        {cartSneakers.length ? (
+        {cartItems.length ? (
           <>
             <ul className="cart__items">
-              {cartSneakers.map((sneaker) => (
+              {cartItems.map((sneaker) => (
                 <li key={sneaker.id} className="cart-item">
                   <img
                     className="cart-item__image"
@@ -31,7 +31,7 @@ function Cart({ onClose, cartSneakers, onRemove }) {
                     <p className="cart-item__price">{sneaker.price} руб.</p>
                   </div>
                   <img
-                    onClick={() => onRemove(sneaker)}
+                    onClick={() => onRemoveItem(sneaker)}
                     className="cart-item__remove-button"
                     src={remove_button}
                     alt="Крестик"

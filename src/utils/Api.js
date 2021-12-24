@@ -24,10 +24,12 @@ class Api {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
-        id: newItem.id,
+        customId: newItem.customId,
         title: newItem.title,
         price: newItem.price,
         imgUrl: newItem.imgUrl,
+        isOnFav: newItem.isOnFav,
+        isOnCart: newItem.isOnCart,
       }),
     })
       .then((res) => this._checkServerResponse(res))
@@ -36,12 +38,22 @@ class Api {
       });
   }
 
-  removeItemFromCart(itemId) {
-    return fetch(`${this._baseUrl}cart/${itemId}`, {
+  removeItem(itemId, endpoint) {
+    return fetch(`${this._baseUrl}${endpoint}/${itemId}`, {
       method: "DELETE",
       headers: this._headers,
     }).then((res) => this._checkServerResponse(res));
   }
+
+  // changeStatus(itemId, endpoint, value) {
+  //   return fetch(`${this._baseUrl}${endpoint}/${itemId}`, {
+  //     method: "PUT",
+  //     headers: this._headers,
+  //     body: JSON.stringify({
+  //       isOnFav: value,
+  //     }),
+  //   }).then((res) => this._checkServerResponse(res));
+  // }
 }
 
 export const api = new Api({

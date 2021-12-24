@@ -1,95 +1,162 @@
+import React, { useEffect, useMemo, useState } from "react";
+import { Route, Switch } from "react-router-dom";
 import "./App.css";
-import CardList from "./components/CardList";
-import React, { useState, useMemo, useEffect } from "react";
-import CardSearch from "./components/CardSearch";
-import Header from "./components/Header";
 import Cart from "./components/Cart";
+import Header from "./components/Header";
+import Favorites from "./pages/Favorites";
+import Home from "./pages/Home";
 import { api } from "./utils/Api";
 
 function App() {
-  const [sneakers, setSneakers] = useState([]);
-  const [cartSneakers, setCartSneakers] = useState([]);
-  const [favorites, setFavotites] = useState([]);
-  const [search, setSearch] = useState("");
-  const [cartOpen, setCartOpen] = useState(false);
+  const [items, setItems] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+  const [favoriteItems, setFavoriteItems] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isCartOpened, setIsCartOpened] = useState(false);
 
   useEffect(() => {
-    api
-      .getInitialItems("items")
-      .then((response) => {
-        setSneakers(response);
-      })
-      .catch((error) => console.log(error));
-    api
-      .getInitialItems("cart")
-      .then((response) => {
-        setCartSneakers(response);
-      })
-      .catch((error) => console.log(error));
+    const getInitialData = async () => {
+      const itemsResponse = await api
+        .getInitialItems("items")
+        .then((response) => {
+          return response;
+        })
+        .catch((error) => console.log(error));
+
+      const cartResponse = await api
+        .getInitialItems("cart")
+        .then((response) => {
+          return response;
+        })
+        .catch((error) => console.log(error));
+
+      const favoritesResponse = await api
+        .getInitialItems("favorites")
+        .then((response) => {
+          return response;
+        })
+        .catch((error) => console.log(error));
+
+      setItems(itemsResponse);
+      setCartItems(cartResponse);
+      setFavoriteItems(favoritesResponse);
+    };
+
+    getInitialData();
   }, []);
 
-  const cartRemoveHandler = (deletedSneaker) => {
+  const removeFromCartHandler = (deletedItem) => {
     api
-      .removeItemFromCart(deletedSneaker.id)
+      .removeItem(deletedItem.id, "cart")
       .then(() => {
-        setCartSneakers((state) =>
-          state.filter((sneaker) => sneaker.id !== deletedSneaker.id)
+        setCartItems((state) =>
+          state.filter((item) => item.id !== deletedItem.id)
         );
       })
       .catch((error) => console.log(error));
   };
 
   const searchedCards = useMemo(() => {
-    return sneakers.filter((card) =>
-      card.title.toLowerCase().includes(search.toLowerCase())
+    return items.filter((card) =>
+      card.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
-  }, [search, sneakers]);
+  }, [searchQuery, items]);
 
   const cartOpenHandler = () => {
-    setCartOpen(true);
+    setIsCartOpened(true);
   };
 
   const cartCloseHandler = () => {
-    setCartOpen(false);
+    setIsCartOpened(false);
   };
 
-  const onPlusClick = (cardData) => {
-    setCartSneakers((prev) => [...prev, cardData]);
+  const onAddToCart = (clickedCard) => {
+    setCartItems((prev) => [...prev, clickedCard]);
   };
 
-  const onFavoriteClick = (cardData) => {
-    setFavotites((prev) => [...prev, cardData]);
+  const onAddToFavorites = (clickedCard) => {
+    const indexInFavorites = favoriteItems.findIndex(
+      (card) => card.customId === clickedCard.customId
+    );
+    // const indexInStore = items.findIndex(
+    //   (card) => card.customId === clickedCard.customId
+    // );
+
+    if (favoriteItems.find((card) => card.customId === clickedCard.customId)) {
+      api
+        .removeItem(favoriteItems[indexInFavorites].id, "favorites")
+        .then(() => {
+          setFavoriteItems((state) =>
+            state.filter((card) => card.customId !== clickedCard.customId)
+          );
+        })
+        .catch((error) => console.log(error));
+      // api
+      //   .changeStatus(items[indexInStore].id, "items", false)
+      //   .then(() => {
+      //     api
+      //       .getInitialItems("items")
+      //       .then((response) => {
+      //         setItems(response);
+      //       })
+      //       .catch((error) => console.log(error));
+      //   })
+      //   .catch((error) => console.log(error));
+    } else {
+      api
+        .addItem(clickedCard, "favorites")
+        .then((response) => {
+          setFavoriteItems((prev) => [...prev, response]);
+        })
+        .catch((error) => console.log(error));
+      // api
+      //   .changeStatus(clickedCard.id, "items", true)
+      //   .then(() => {
+      //     api
+      //       .getInitialItems("items")
+      //       .then((response) => {
+      //         setItems(response);
+      //       })
+      //       .catch((error) => console.log(error));
+      //   })
+      //   .catch((error) => console.log(error));
+    }
   };
 
   return (
     <div className="page">
-      {cartOpen && (
+      {isCartOpened && (
         <Cart
-          setCartSneakers={setCartSneakers}
+          cartItems={cartItems}
           onClose={cartCloseHandler}
-          cartSneakers={cartSneakers}
-          onRemove={cartRemoveHandler}
+          onRemoveItem={removeFromCartHandler}
         />
       )}
       <div className="page__wrapper">
-        <Header onClickCart={cartOpenHandler} />
-        <section className="store">
-          <div className="store__header">
-            <h2 className="store__title">
-              {search ? `Поиск по запросу: ${search}` : "Все кроссовки"}
-            </h2>
-            <CardSearch search={search} setSearch={setSearch} />
-          </div>
-          {searchedCards.length ? (
-            <CardList
-              cards={searchedCards}
-              onPlus={onPlusClick}
-              onFavorite={onFavoriteClick}
+        <Header onOpenCart={cartOpenHandler} />
+        <Switch>
+          <Route path="/" exact>
+            <Home
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+              searchedCards={searchedCards}
+              onAddToCart={onAddToCart}
+              onAddToFavorites={onAddToFavorites}
+              favoriteItems={favoriteItems}
             />
-          ) : (
-            <h3 className="store__search-result">Нет результатов</h3>
-          )}
-        </section>
+          </Route>
+          <Route path="/favorites" exact>
+            <Favorites
+              favoriteItems={favoriteItems}
+              onAddToCart={onAddToCart}
+              onAddToFavorites={onAddToFavorites}
+              isOnFavoritesPage={true}
+            />
+          </Route>
+          <Route path="*">
+            <h1>404</h1>
+          </Route>
+        </Switch>
       </div>
     </div>
   );

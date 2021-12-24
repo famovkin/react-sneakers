@@ -1,20 +1,24 @@
 import React, { useState } from "react";
-import plus from "../images/button-plus.svg";
 import plusAdded from "../images/button-added.svg";
+import plus from "../images/button-plus.svg";
 import heartDefault from "../images/heart-default.svg";
 import heartLiked from "../images/heart-liked.svg";
 import { api } from "../utils/Api";
 
-function Card(props) {
-  const [isAdded, setIsAdded] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
-
+function Card({
+  card,
+  onAddToCart,
+  onAddToFavorites,
+  isOnFavoritesPage = false,
+  isOnFavorites,
+}) {
+  const [isAdded, setIsAdded] = useState(card.isOnCart);
   const plusHandler = () => {
     if (!isAdded) {
       api
-        .addItem(props, "cart")
+        .addItem(card, "cart")
         .then((response) => {
-          props.onPlus(response);
+          onAddToCart(response);
           setIsAdded(true);
         })
         .catch((error) => console.log(error));
@@ -22,15 +26,7 @@ function Card(props) {
   };
 
   const favoriteHandler = () => {
-    if (!isFavorite) {
-      api
-        .addItem(props, "favorites")
-        .then((response) => {
-          props.onFavorite(response);
-          setIsFavorite(!isFavorite);
-        })
-        .catch((error) => console.log(error));
-    }
+    onAddToFavorites(card);
   };
 
   return (
@@ -38,15 +34,19 @@ function Card(props) {
       <img
         onClick={favoriteHandler}
         className="card__favorite"
-        src={isFavorite ? heartLiked : heartDefault}
+        src={
+          (isOnFavoritesPage && heartLiked) || isOnFavorites
+            ? heartLiked
+            : heartDefault
+        }
         alt="Серое сердце"
       ></img>
-      <img className="card__image" src={props.imgUrl} alt={props.title}></img>
-      <p className="card__title">{props.title}</p>
+      <img className="card__image" src={card.imgUrl} alt={card.title}></img>
+      <p className="card__title">{card.title}</p>
       <div className="card__buy">
         <div className="card__price">
           <p className="card__price-title">Цена:</p>
-          <p className="card__price-value">{props.price} руб.</p>
+          <p className="card__price-value">{card.price} руб.</p>
         </div>
         <button className="card__add-button">
           <img
