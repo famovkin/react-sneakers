@@ -1,14 +1,7 @@
 import React from "react";
 import Card from "./Card";
 
-function CardList({
-  cards,
-  onAddToCart,
-  onAddToFavorites,
-  favoriteItems,
-  cartItems,
-  isLoading,
-}) {
+function CardList({ cards, onAddToCart, onAddToFavorites, isLoading }) {
   return (
     <ul className="cards-grid">
       {cards.map((card, index) => (
@@ -17,11 +10,7 @@ function CardList({
           card={card}
           onAddToCart={onAddToCart}
           onAddToFavorites={onAddToFavorites}
-          isOnFavorites={favoriteItems.some(
-            (item) => item.customId === card.customId
-          )}
           isLoading={isLoading}
-          isOnCart={cartItems.some((item) => item.customId === card.customId)}
         />
       ))}
     </ul>

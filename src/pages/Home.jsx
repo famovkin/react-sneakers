@@ -29,8 +29,6 @@ function Home({
             cards={isLoading ? emptyArray : searchedCards}
             onAddToCart={onAddToCart}
             onAddToFavorites={onAddToFavorites}
-            favoriteItems={favoriteItems}
-            cartItems={cartItems}
             isLoading={isLoading}
           />
         )}

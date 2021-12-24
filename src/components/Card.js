@@ -1,17 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import ContentLoader from "react-content-loader";
 import plusAdded from "../images/button-added.svg";
 import plusDefault from "../images/button-plus.svg";
 import heartDefault from "../images/heart-default.svg";
 import heartLiked from "../images/heart-liked.svg";
+import { ItemsContext } from "../contexts/ItemsContext";
 
 function Card({
   card,
   onAddToCart,
   onAddToFavorites,
   isOnFavoritesPage = false,
-  isOnFavorites,
-  isOnCart,
   isLoading,
 }) {
   const cartHandler = () => {
@@ -21,6 +20,8 @@ function Card({
   const favoriteHandler = () => {
     onAddToFavorites(card);
   };
+
+  const state = useContext(ItemsContext);
 
   return (
     <li className="card">
@@ -45,7 +46,10 @@ function Card({
             onClick={favoriteHandler}
             className="card__favorite"
             src={
-              (isOnFavoritesPage && heartLiked) || isOnFavorites
+              (isOnFavoritesPage && heartLiked) ||
+              state.favoriteItems.some(
+                (item) => item.customId === card.customId
+              )
                 ? heartLiked
                 : heartDefault
             }
@@ -62,7 +66,13 @@ function Card({
               <img
                 onClick={cartHandler}
                 className="card__add-button-image"
-                src={isOnCart ? plusAdded : plusDefault}
+                src={
+                  state.cartItems.some(
+                    (item) => item.customId === card.customId
+                  )
+                    ? plusAdded
+                    : plusDefault
+                }
               ></img>
             </button>
           </div>

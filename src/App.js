@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Favorites from "./pages/Favorites";
 import Home from "./pages/Home";
 import { api } from "./utils/Api";
+import { ItemsContext } from "./contexts/ItemsContext";
 
 function App() {
   const [items, setItems] = useState([]);
@@ -130,33 +131,30 @@ function App() {
         />
       )}
       <div className="page__wrapper">
-        <Header onOpenCart={cartOpenHandler} />
-        <Switch>
-          <Route path="/" exact>
-            <Home
-              searchQuery={searchQuery}
-              setSearchQuery={setSearchQuery}
-              searchedCards={searchedCards}
-              onAddToCart={onAddToCart}
-              onAddToFavorites={onAddToFavorites}
-              favoriteItems={favoriteItems}
-              cartItems={cartItems}
-              isLoading={isLoading}
-            />
-          </Route>
-          <Route path="/favorites" exact>
-            <Favorites
-              favoriteItems={favoriteItems}
-              cartItems={cartItems}
-              onAddToCart={onAddToCart}
-              onAddToFavorites={onAddToFavorites}
-              isOnFavoritesPage={true}
-            />
-          </Route>
-          <Route path="*">
-            <h1>404</h1>
-          </Route>
-        </Switch>
+        <ItemsContext.Provider value={{ items, cartItems, favoriteItems }}>
+          <Header onOpenCart={cartOpenHandler} />
+          <Switch>
+            <Route path="/" exact>
+              <Home
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+                searchedCards={searchedCards}
+                onAddToCart={onAddToCart}
+                onAddToFavorites={onAddToFavorites}
+                isLoading={isLoading}
+              />
+            </Route>
+            <Route path="/favorites" exact>
+              <Favorites
+                onAddToCart={onAddToCart}
+                onAddToFavorites={onAddToFavorites}
+              />
+            </Route>
+            <Route path="*">
+              <h1>404</h1>
+            </Route>
+          </Switch>
+        </ItemsContext.Provider>
       </div>
     </div>
   );
