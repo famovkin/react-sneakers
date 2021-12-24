@@ -13,9 +13,11 @@ function App() {
   const [favoriteItems, setFavoriteItems] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [isCartOpened, setIsCartOpened] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getInitialData = async () => {
+      setIsLoading(true);
       const itemsResponse = await api
         .getInitialItems("items")
         .then((response) => {
@@ -40,6 +42,7 @@ function App() {
       setItems(itemsResponse);
       setCartItems(cartResponse);
       setFavoriteItems(favoritesResponse);
+      setIsLoading(false);
     };
 
     getInitialData();
@@ -143,6 +146,7 @@ function App() {
               onAddToCart={onAddToCart}
               onAddToFavorites={onAddToFavorites}
               favoriteItems={favoriteItems}
+              isLoading={isLoading}
             />
           </Route>
           <Route path="/favorites" exact>

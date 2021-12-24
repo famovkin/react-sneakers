@@ -9,7 +9,9 @@ function Home({
   onAddToCart,
   onAddToFavorites,
   favoriteItems,
+  isLoading,
 }) {
+  const emptyArray = [{}, {}, {}, {}, {}, {}, {}, {}];
   return (
     <div>
       <section className="store">
@@ -19,15 +21,16 @@ function Home({
           </h2>
           <CardSearch search={searchQuery} setSearch={setSearchQuery} />
         </div>
-        {searchedCards.length ? (
+        {searchedCards.length === 0 && searchQuery ? (
+          <h3 className="store__search-result">Нет результатов</h3>
+        ) : (
           <CardList
-            cards={searchedCards}
+            cards={isLoading ? emptyArray : searchedCards}
             onAddToCart={onAddToCart}
             onAddToFavorites={onAddToFavorites}
             favoriteItems={favoriteItems}
+            isLoading={isLoading}
           />
-        ) : (
-          <h3 className="store__search-result">Нет результатов</h3>
         )}
       </section>
     </div>
