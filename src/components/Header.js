@@ -34,9 +34,11 @@ function Header({ onOpenCart }) {
             <img className="header__cart-image" src={cart} alt="Корзина" />
             <span className="header__price">{itemsPrice} руб.</span>
           </li>
-          <li>
-            <img className="header__icon" src={profile} atl="Человек"></img>
-          </li>
+          <Link to="/orders">
+            <li>
+              <img className="header__icon" src={profile} atl="Человек"></img>
+            </li>
+          </Link>
           <Link to="/favorites">
             <li>
               <img className="header__icon" src={favorite} alt="Сердце" />

@@ -26,7 +26,7 @@ function Cart({ cartItems, cartCloseHandler, onRemoveItem }) {
         setIsOrderCompleted(true);
       })
       .catch((error) => console.log(error))
-      .finally(() => console.log(1));
+      .finally(() => setIsLoading(false));
 
     for (let i = 0; i < cartItems.length; i++) {
       const item = cartItems[i];

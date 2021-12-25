@@ -42,20 +42,22 @@ function Card({
         </ContentLoader>
       ) : (
         <>
-          <img
-            onClick={favoriteHandler}
-            className="card__favorite"
-            src={
-              (isOnFavoritesPage && heartLiked) ||
-              state.favoriteItems.some(
-                (item) => item.customId === card.customId
-              )
-                ? heartLiked
-                : heartDefault
-            }
-            alt="Серое сердце"
-          ></img>
-          <img className="card__image" src={card.imgUrl} alt={card.title}></img>
+          {onAddToFavorites && (
+            <img
+              onClick={favoriteHandler}
+              className="card__favorite"
+              src={
+                (isOnFavoritesPage && heartLiked) ||
+                state.favoriteItems.some(
+                  (item) => item.customId === card.customId
+                )
+                  ? heartLiked
+                  : heartDefault
+              }
+              alt="Серое сердце"
+            />
+          )}
+          <img className="card__image" src={card.imgUrl} alt={card.title} />
           <p className="card__title">{card.title}</p>
           <div className="card__buy">
             <div className="card__price">
@@ -63,17 +65,19 @@ function Card({
               <p className="card__price-value">{card.price} руб.</p>
             </div>
             <button className="card__add-button">
-              <img
-                onClick={cartHandler}
-                className="card__add-button-image"
-                src={
-                  state.cartItems.some(
-                    (item) => item.customId === card.customId
-                  )
-                    ? plusAdded
-                    : plusDefault
-                }
-              ></img>
+              {onAddToCart && (
+                <img
+                  onClick={cartHandler}
+                  className="card__add-button-image"
+                  src={
+                    state.cartItems.some(
+                      (item) => item.customId === card.customId
+                    )
+                      ? plusAdded
+                      : plusDefault
+                  }
+                />
+              )}
             </button>
           </div>
         </>
