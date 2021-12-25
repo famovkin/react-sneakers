@@ -27,30 +27,19 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const getInitialData = async () => {
-      setIsLoading(true);
-      const itemsResponse = await api
-        .getInitialItems("items")
-        .then((response) => response)
-        .catch((error) => console.log(error));
-
-      const cartResponse = await api
-        .getInitialItems("cart")
-        .then((response) => response)
-        .catch((error) => console.log(error));
-
-      const favoritesResponse = await api
-        .getInitialItems("favorites")
-        .then((response) => response)
-        .catch((error) => console.log(error));
-
-      setItems(itemsResponse);
-      setCartItems(cartResponse);
-      setFavoriteItems(favoritesResponse);
-      setIsLoading(false);
-    };
-
-    getInitialData();
+    setIsLoading(true);
+    Promise.all([
+      api.getInitialItems("items"),
+      api.getInitialItems("cart"),
+      api.getInitialItems("favorites"),
+    ])
+      .then(([itemsResponse, cartResponse, favoritesResponse]) => {
+        setItems(itemsResponse);
+        setCartItems(cartResponse);
+        setFavoriteItems(favoritesResponse);
+      })
+      .catch((error) => console.log(error))
+      .finally(() => setIsLoading(false));
   }, []);
 
   const removeFromCartHandler = (deletedItem) => {
