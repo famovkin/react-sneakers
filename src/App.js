@@ -133,23 +133,23 @@ function App() {
 
   return (
     <AuthContext.Provider value={{ isAuth: isAuth, setIsAuth: setIsAuth }}>
-      <div className="page">
-        {isCartOpened && (
-          <SetItemsContext.Provider value={{ setCartItems: setCartItems }}>
-            <Cart
-              cartItems={cartItems}
-              cartCloseHandler={cartCloseHandler}
-              onRemoveItem={removeFromCartHandler}
-            />
-          </SetItemsContext.Provider>
-        )}
-        <ItemsContext.Provider
-          value={{
-            items: items,
-            cartItems: cartItems,
-            favoriteItems: favoriteItems,
-          }}
-        >
+      <ItemsContext.Provider
+        value={{
+          items: items,
+          cartItems: cartItems,
+          favoriteItems: favoriteItems,
+        }}
+      >
+        <div className="page">
+          {isCartOpened && (
+            <SetItemsContext.Provider value={{ setCartItems: setCartItems }}>
+              <Cart
+                cartItems={cartItems}
+                cartCloseHandler={cartCloseHandler}
+                onRemoveItem={removeFromCartHandler}
+              />
+            </SetItemsContext.Provider>
+          )}
           {isAuth ? (
             <Switch>
               <Route path="/" exact>
@@ -184,8 +184,8 @@ function App() {
               <Redirect to="/login" />
             </Switch>
           )}
-        </ItemsContext.Provider>
-      </div>
+        </div>
+      </ItemsContext.Provider>
     </AuthContext.Provider>
   );
 }

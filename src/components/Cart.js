@@ -5,6 +5,7 @@ import remove_button from "../images/remove-button-colored.svg";
 import Message from "./Message";
 import { SetItemsContext } from "../contexts/SetItemsContext";
 import { api } from "../utils/Api";
+import { useCheckout } from "./hooks/useCheckout";
 
 function Cart({ cartItems, cartCloseHandler, onRemoveItem }) {
   const [isOrderCompleted, setIsOrderCompleted] = useState(false);
@@ -12,6 +13,7 @@ function Cart({ cartItems, cartCloseHandler, onRemoveItem }) {
   const [isLoading, setIsLoading] = useState(false);
   const setState = useContext(SetItemsContext);
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const { itemsPrice, shippingPrice, totalPrice } = useCheckout();
 
   const completeOrder = async () => {
     setIsLoading(true);
@@ -70,14 +72,19 @@ function Cart({ cartItems, cartCloseHandler, onRemoveItem }) {
             </ul>
             <ul className="order-info">
               <li className="order-info__content">
-                <p className="order-info__title">Итого:</p>
+                <p className="order-info__title">Товары:</p>
                 <div className="order-info__dots"></div>
-                <p className="order-info__value">21 498 руб.</p>
+                <p className="order-info__value">{itemsPrice} руб.</p>
               </li>
               <li className="order-info__content">
-                <p className="order-info__title">Налог 5%:</p>
+                <p className="order-info__title">Доставка 5%:</p>
                 <div className="order-info__dots"></div>
-                <p className="order-info__value">1074 руб.</p>
+                <p className="order-info__value">{shippingPrice} руб.</p>
+              </li>
+              <li className="order-info__content">
+                <b className="order-info__title">Итого:</b>
+                <div className="order-info__dots"></div>
+                <p className="order-info__value">{totalPrice} руб.</p>
               </li>
             </ul>
             <button

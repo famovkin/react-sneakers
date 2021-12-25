@@ -6,9 +6,11 @@ import logo from "../images/logo.png";
 import exit from "../images/exit.svg";
 import profile from "../images/profile.svg";
 import { AuthContext } from "../contexts/AuthContext";
+import { useCheckout } from "./hooks/useCheckout";
 
 function Header({ onOpenCart }) {
   const { setIsAuth } = useContext(AuthContext);
+  const { itemsPrice } = useCheckout();
 
   const logout = () => {
     setIsAuth(false);
@@ -30,7 +32,7 @@ function Header({ onOpenCart }) {
         <ul className="header__account">
           <li onClick={onOpenCart} className="header__cart">
             <img className="header__cart-image" src={cart} alt="Корзина" />
-            <span className="header__price">1205 руб.</span>
+            <span className="header__price">{itemsPrice} руб.</span>
           </li>
           <li>
             <img className="header__icon" src={profile} atl="Человек"></img>

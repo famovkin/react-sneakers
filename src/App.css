@@ -341,6 +341,7 @@ a {
 
 .order-info__content {
   display: flex;
+  justify-content: space-around;
   margin-bottom: 8px;
 }
 
