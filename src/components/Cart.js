@@ -6,6 +6,8 @@ import Message from "./Message";
 import { SetItemsContext } from "../contexts/SetItemsContext";
 import { api } from "../utils/Api";
 import { useCheckout } from "./hooks/useCheckout";
+import Button from "./UI/Button";
+import right_arrow from "../images/right-arrow.svg";
 
 function Cart({ cartItems, cartCloseHandler, onRemoveItem, isCartOpened }) {
   const [isOrderCompleted, setIsOrderCompleted] = useState(false);
@@ -35,6 +37,11 @@ function Cart({ cartItems, cartCloseHandler, onRemoveItem, isCartOpened }) {
     }
   };
 
+  const closeCart = () => {
+    cartCloseHandler();
+    setIsOrderCompleted(false);
+  };
+
   return (
     <div className={`cart ${isCartOpened && "cart_visible"}`}>
       <div
@@ -43,7 +50,7 @@ function Cart({ cartItems, cartCloseHandler, onRemoveItem, isCartOpened }) {
         <div className="cart__header">
           <h2 className="cart__title">Корзина</h2>
           <img
-            onClick={cartCloseHandler}
+            onClick={closeCart}
             className="cart-item__remove-button"
             src={remove_button}
             alt="Крестик"
@@ -89,13 +96,10 @@ function Cart({ cartItems, cartCloseHandler, onRemoveItem, isCartOpened }) {
                 <p className="order-info__value">{totalPrice} руб.</p>
               </li>
             </ul>
-            <button
-              disabled={isLoading}
-              onClick={completeOrder}
-              className={`button ${isLoading && "button_disabled"}`}
-            >
+            <Button isLoading={isLoading} onClick={completeOrder}>
               Оформить заказ
-            </button>
+              <img className="button__arrow" src={right_arrow} alt="Стрелка" />
+            </Button>
           </>
         ) : (
           <Message
@@ -104,9 +108,9 @@ function Cart({ cartItems, cartCloseHandler, onRemoveItem, isCartOpened }) {
             subtitle={
               isOrderCompleted
                 ? `Ваш заказ #${orderId} скоро будет передан курьерской доставке`
-                : "Добавьте хотя бы один товар, чтобы оформить заказ"
+                : "Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."
             }
-            onButtonClick={cartCloseHandler}
+            onButtonClick={closeCart}
           />
         )}
       </div>

@@ -382,6 +382,10 @@ a {
   color: #fff;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .button_type_login {
@@ -394,6 +398,46 @@ a {
 
 .button:active {
   background: #34ad4a;
+}
+
+.button__arrow {
+  animation: shaking-right-arrow 1.6s infinite ease-in;
+}
+
+@keyframes shaking-right-arrow {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateX(0);
+  }
+
+  40% {
+    transform: translateX(10px);
+  }
+
+  60% {
+    transform: translateX(8px);
+  }
+}
+
+@keyframes shaking-left-arrow {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateX(0);
+  }
+
+  40% {
+    transform: translateX(-10px);
+  }
+
+  60% {
+    transform: translateX(-8px);
+  }
 }
 
 @keyframes changing-btn-opacity {
@@ -433,8 +477,8 @@ a {
 }
 
 .message__image {
-  width: 120px;
-  margin-bottom: 10px;
+  width: 10px;
+  margin-bottom: 20px;
 }
 
 .message__title {
@@ -469,6 +513,15 @@ a {
   margin-bottom: 25px;
   font-size: 23px;
   text-align: center;
+}
+
+.input {
+  padding: 10px 15px;
+  margin: 5px;
+  border: none;
+  border-bottom: 1px solid #e3eeff;
+  outline: none;
+  font-size: 14px;
 }
 
 .order {

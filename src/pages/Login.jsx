@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Input from "../components/UI/input/Input";
+import Input from "../components/UI/Input";
 import logo from "../images/logo.png";
 import { AuthContext } from "../contexts/AuthContext";
 
