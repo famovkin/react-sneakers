@@ -15,7 +15,7 @@ function Login() {
   return (
     <div className="login">
       <form onSubmit={login} className="login__form">
-        <img className="logo logo_type_login" src={logo} alt="Кроссовки"></img>
+        <img className="logo logo_type_login" src={logo} alt="Кроссовки" />
         <h1 className="login__title">Авторизация</h1>
         <Input type="text" placeholder="Логин" />
         <Input type="password" placeholder="Пароль" />

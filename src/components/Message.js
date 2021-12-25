@@ -1,14 +1,20 @@
 import React from "react";
+import left_arrow from "../images/left-arrow.svg";
+import Button from "./UI/Button";
+import { useHistory } from "react-router-dom";
 
 function Message({ img, title, subtitle, onButtonClick }) {
+  const history = useHistory();
+
   return (
     <div className="message">
-      <img className="message__image" src={img} alt="Пустая коробка"></img>
+      <img className="message__image" src={img} alt="Пустая коробка" />
       <h3 className="message__title">{title}</h3>
       <p className="message__subtitle">{subtitle}</p>
-      <button onClick={onButtonClick} className="button">
+      <Button onClick={onButtonClick || history.goBack} className="button">
+        <img className="button__left-arrow" src={left_arrow} alt="Стрелка" />
         Вернуться назад
-      </button>
+      </Button>
     </div>
   );
 }

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import CardList from "../components/CardList";
 import Header from "../components/Header";
+import Message from "../components/Message";
 import { api } from "../utils/Api";
+import emoji from "../images/emoji/emoji-2.png";
 
 function Orders({ onOpenCart }) {
   const [orders, setOrders] = useState([]);
@@ -32,7 +34,13 @@ function Orders({ onOpenCart }) {
           <h2 className="store__title">Мои заказы</h2>
         </div>
         {orders.length === 0 && !isLoading && (
-          <h3 className="store__search-result">Пока заказов нет</h3>
+          <>
+            <Message
+              img={emoji}
+              title="У вас нет заказов"
+              subtitle="Самое время совершить первую покупку"
+            />
+          </>
         )}
         {orders.map((order) => (
           <div className="order" key={order.id}>

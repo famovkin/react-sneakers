@@ -54,7 +54,7 @@ function Cart({ cartItems, cartCloseHandler, onRemoveItem, isCartOpened }) {
             className="cart-item__remove-button"
             src={remove_button}
             alt="Крестик"
-          ></img>
+          />
         </div>
         {cartItems.length ? (
           <>
@@ -65,7 +65,7 @@ function Cart({ cartItems, cartCloseHandler, onRemoveItem, isCartOpened }) {
                     className="cart-item__image"
                     src={item.imgUrl}
                     alt={item.title}
-                  ></img>
+                  />
                   <div className="cart-item__text">
                     <p className="cart-item__title">{item.title}</p>
                     <p className="cart-item__price">{item.price} руб.</p>
@@ -75,7 +75,7 @@ function Cart({ cartItems, cartCloseHandler, onRemoveItem, isCartOpened }) {
                     className="cart-item__remove-button"
                     src={remove_button}
                     alt="Крестик"
-                  ></img>
+                  />
                 </li>
               ))}
             </ul>
@@ -98,7 +98,11 @@ function Cart({ cartItems, cartCloseHandler, onRemoveItem, isCartOpened }) {
             </ul>
             <Button isLoading={isLoading} onClick={completeOrder}>
               Оформить заказ
-              <img className="button__arrow" src={right_arrow} alt="Стрелка" />
+              <img
+                className="button__right-arrow"
+                src={right_arrow}
+                alt="Стрелка"
+              />
             </Button>
           </>
         ) : (

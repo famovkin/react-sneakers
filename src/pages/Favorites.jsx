@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import Card from "../components/Card";
 import { ItemsContext } from "../contexts/ItemsContext";
 import Header from "../components/Header";
+import Message from "../components/Message";
+import emoji from "../images/emoji/emoji-1.png";
 
 function Favorites({ onAddToCart, onAddToFavorites, onOpenCart }) {
   const state = useContext(ItemsContext);
@@ -25,7 +27,11 @@ function Favorites({ onAddToCart, onAddToFavorites, onOpenCart }) {
               />
             ))
           ) : (
-            <h3 className="store__search-result">Пока закладок нет</h3>
+            <Message
+              img={emoji}
+              title="Закладок нет :("
+              subtitle="Вы ничего не добавляли в закладки"
+            />
           )}
         </ul>
       </section>
