@@ -58,6 +58,13 @@ a {
   margin-right: 16px;
 }
 
+.logo_type_login {
+  width: 120px;
+  margin-right: 0;
+  align-self: center;
+  margin-bottom: 50px;
+}
+
 .header__title {
   text-transform: uppercase;
   font-weight: 600;
@@ -353,6 +360,10 @@ a {
   transition: all 0.2s ease-in-out;
 }
 
+.button_type_login {
+  margin-top: 20px;
+}
+
 .button:hover {
   background: #41d95d;
 }
@@ -414,4 +425,24 @@ a {
   line-height: 24px;
   opacity: 0.4;
   margin-bottom: 20px;
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+  padding: 50px 30px 25px;
+  background: #fff;
+  border-radius: 25px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
+}
+
+.login__title {
+  margin-bottom: 25px;
+  font-size: 23px;
+  text-align: center;
 }
