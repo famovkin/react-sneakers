@@ -2,6 +2,8 @@ import React from "react";
 import CardList from "../components/CardList";
 import CardSearch from "../components/CardSearch";
 import Header from "../components/Header";
+import Message from "../components/Message";
+import emoji from "../images/emoji/emoji-3.png";
 
 function Home({
   searchQuery,
@@ -24,7 +26,12 @@ function Home({
           <CardSearch search={searchQuery} setSearch={setSearchQuery} />
         </div>
         {searchedCards.length === 0 && searchQuery ? (
-          <h3 className="store__search-result">Нет результатов</h3>
+          <Message
+            img={emoji}
+            title="Нет результатов"
+            subtitle="Попробуйте найти что-нибудь другое"
+            removeButton="true"
+          />
         ) : (
           <CardList
             cards={isLoading ? emptyArray : searchedCards}

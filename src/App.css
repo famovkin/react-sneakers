@@ -129,7 +129,7 @@ a {
 .store__header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 50px;
+  margin-bottom: 70px;
 }
 
 .store__title {
@@ -482,7 +482,7 @@ a {
 }
 
 .message__image {
-  width: 120px;
+  width: 90px;
   margin-bottom: 20px;
 }
 
