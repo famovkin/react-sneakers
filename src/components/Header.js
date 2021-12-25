@@ -6,7 +6,7 @@ import logo from "../images/logo.png";
 import exit from "../images/exit.svg";
 import profile from "../images/profile.svg";
 import { AuthContext } from "../contexts/AuthContext";
-import { useCheckout } from "./hooks/useCheckout";
+import { useCheckout } from "../hooks/useCheckout";
 
 function Header({ onOpenCart }) {
   const { setIsAuth } = useContext(AuthContext);

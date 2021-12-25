@@ -5,7 +5,7 @@ import remove_button from "../images/remove-button-colored.svg";
 import Message from "./Message";
 import { SetItemsContext } from "../contexts/SetItemsContext";
 import { api } from "../utils/Api";
-import { useCheckout } from "./hooks/useCheckout";
+import { useCheckout } from "../hooks/useCheckout";
 import Button from "./UI/Button";
 import right_arrow from "../images/right-arrow.svg";
 
