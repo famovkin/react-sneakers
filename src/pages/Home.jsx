@@ -1,6 +1,7 @@
 import React from "react";
 import CardList from "../components/CardList";
 import CardSearch from "../components/CardSearch";
+import Header from "../components/Header";
 
 function Home({
   searchQuery,
@@ -8,13 +9,13 @@ function Home({
   searchedCards,
   onAddToCart,
   onAddToFavorites,
-  favoriteItems,
-  cartItems,
+  onOpenCart,
   isLoading,
 }) {
   const emptyArray = [{}, {}, {}, {}, {}, {}, {}, {}];
   return (
-    <div>
+    <div className="page__wrapper">
+      <Header onOpenCart={onOpenCart} />
       <section className="store">
         <div className="store__header">
           <h2 className="store__title">

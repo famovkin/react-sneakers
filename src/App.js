@@ -1,15 +1,15 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Cart from "./components/Cart";
-import Header from "./components/Header";
-import Favorites from "./pages/Favorites";
-import Home from "./pages/Home";
-import { api } from "./utils/Api";
+import { AuthContext } from "./contexts/AuthContext";
 import { ItemsContext } from "./contexts/ItemsContext";
 import { SetItemsContext } from "./contexts/SetItemsContext";
-import { AuthContext } from "./contexts/AuthContext";
+import Favorites from "./pages/Favorites";
+import Home from "./pages/Home";
 import Login from "./pages/Login";
+import Orders from "./pages/Orders";
+import { api } from "./utils/Api";
 
 function App() {
   const [items, setItems] = useState([]);
@@ -31,23 +31,17 @@ function App() {
       setIsLoading(true);
       const itemsResponse = await api
         .getInitialItems("items")
-        .then((response) => {
-          return response;
-        })
+        .then((response) => response)
         .catch((error) => console.log(error));
 
       const cartResponse = await api
         .getInitialItems("cart")
-        .then((response) => {
-          return response;
-        })
+        .then((response) => response)
         .catch((error) => console.log(error));
 
       const favoritesResponse = await api
         .getInitialItems("favorites")
-        .then((response) => {
-          return response;
-        })
+        .then((response) => response)
         .catch((error) => console.log(error));
 
       setItems(itemsResponse);
@@ -153,26 +147,25 @@ function App() {
           {isAuth ? (
             <Switch>
               <Route path="/" exact>
-                <div className="page__wrapper">
-                  <Header onOpenCart={cartOpenHandler} />
-                  <Home
-                    searchQuery={searchQuery}
-                    setSearchQuery={setSearchQuery}
-                    searchedCards={searchedCards}
-                    onAddToCart={onAddToCart}
-                    onAddToFavorites={onAddToFavorites}
-                    isLoading={isLoading}
-                  />
-                </div>
+                <Home
+                  searchQuery={searchQuery}
+                  setSearchQuery={setSearchQuery}
+                  searchedCards={searchedCards}
+                  onAddToCart={onAddToCart}
+                  onAddToFavorites={onAddToFavorites}
+                  onOpenCart={cartOpenHandler}
+                  isLoading={isLoading}
+                />
               </Route>
-              <Route path="/favorites" exact>
-                <div className="page__wrapper">
-                  <Header onOpenCart={cartOpenHandler} />
-                  <Favorites
-                    onAddToCart={onAddToCart}
-                    onAddToFavorites={onAddToFavorites}
-                  />
-                </div>
+              <Route path="/favorites">
+                <Favorites
+                  onAddToCart={onAddToCart}
+                  onAddToFavorites={onAddToFavorites}
+                  onOpenCart={cartOpenHandler}
+                />
+              </Route>
+              <Route path="/orders">
+                <Orders onOpenCart={cartOpenHandler} />
               </Route>
               <Redirect to="/" />
             </Switch>
