@@ -7,7 +7,7 @@ import { SetItemsContext } from "../contexts/SetItemsContext";
 import { api } from "../utils/Api";
 import { useCheckout } from "./hooks/useCheckout";
 
-function Cart({ cartItems, cartCloseHandler, onRemoveItem }) {
+function Cart({ cartItems, cartCloseHandler, onRemoveItem, isCartOpened }) {
   const [isOrderCompleted, setIsOrderCompleted] = useState(false);
   const [orderId, setOrderId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -36,8 +36,10 @@ function Cart({ cartItems, cartCloseHandler, onRemoveItem }) {
   };
 
   return (
-    <div className="cart">
-      <div className="cart__sidebar">
+    <div className={`cart ${isCartOpened && "cart_visible"}`}>
+      <div
+        className={`cart__sidebar ${isCartOpened && "cart__sidebar_visible"}`}
+      >
         <div className="cart__header">
           <h2 className="cart__title">Корзина</h2>
           <img

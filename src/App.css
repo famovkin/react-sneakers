@@ -246,10 +246,17 @@ a {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   z-index: 1;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.2s ease-out;
 }
 
+.cart_visible {
+  visibility: visible;
+  opacity: 1;
+}
 .cart__sidebar {
   display: flex;
   flex-direction: column;
@@ -261,6 +268,12 @@ a {
   width: 385px;
   box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.15);
   padding: 30px;
+  transform: translateX(100%);
+  transition: all 0.2s ease-in-out;
+}
+
+.cart__sidebar_visible {
+  transform: translateX(0);
 }
 
 .cart__header {

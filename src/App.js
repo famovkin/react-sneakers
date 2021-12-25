@@ -135,15 +135,14 @@ function App() {
         }}
       >
         <div className="page">
-          {isCartOpened && (
-            <SetItemsContext.Provider value={{ setCartItems: setCartItems }}>
-              <Cart
-                cartItems={cartItems}
-                cartCloseHandler={cartCloseHandler}
-                onRemoveItem={removeFromCartHandler}
-              />
-            </SetItemsContext.Provider>
-          )}
+          <SetItemsContext.Provider value={{ setCartItems: setCartItems }}>
+            <Cart
+              cartItems={cartItems}
+              cartCloseHandler={cartCloseHandler}
+              onRemoveItem={removeFromCartHandler}
+              isCartOpened={isCartOpened}
+            />
+          </SetItemsContext.Provider>
           {isAuth ? (
             <Switch>
               <Route path="/" exact>
