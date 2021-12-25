@@ -2,7 +2,7 @@ import React from "react";
 import searchImg from "../images/search.svg";
 import remove_button from "../images/remove-button.svg";
 
-function CardSeacrh({ search, setSearch }) {
+function CardSearch({ search, setSearch }) {
   return (
     <div className="store__search">
       <img className="store__search-image" src={searchImg} alt="Лупа"></img>
@@ -23,4 +23,4 @@ function CardSeacrh({ search, setSearch }) {
   );
 }
 
-export default CardSeacrh;
+export default CardSearch;

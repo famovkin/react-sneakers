@@ -50,19 +50,19 @@ function Cart({ cartItems, cartCloseHandler, onRemoveItem }) {
         {cartItems.length ? (
           <>
             <ul className="cart__items">
-              {cartItems.map((sneaker) => (
-                <li key={sneaker.id} className="cart-item">
+              {cartItems.map((item, index) => (
+                <li key={index} className="cart-item">
                   <img
                     className="cart-item__image"
-                    src={sneaker.imgUrl}
-                    alt={sneaker.title}
+                    src={item.imgUrl}
+                    alt={item.title}
                   ></img>
                   <div className="cart-item__text">
-                    <p className="cart-item__title">{sneaker.title}</p>
-                    <p className="cart-item__price">{sneaker.price} руб.</p>
+                    <p className="cart-item__title">{item.title}</p>
+                    <p className="cart-item__price">{item.price} руб.</p>
                   </div>
                   <img
-                    onClick={() => onRemoveItem(sneaker)}
+                    onClick={() => onRemoveItem(item)}
                     className="cart-item__remove-button"
                     src={remove_button}
                     alt="Крестик"
