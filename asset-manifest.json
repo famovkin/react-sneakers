@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/react-sneakers/static/css/main.6f6f1c52.css",
+    "main.js": "/react-sneakers/static/js/main.59a00292.js",
+    "static/media/Inter-Black.woff2": "/react-sneakers/static/media/Inter-Black.141c7af6ed109b318513.woff2",
+    "static/media/Inter-Medium.woff2": "/react-sneakers/static/media/Inter-Medium.6db7e439cc4b0e5c0cd2.woff2",
+    "static/media/Inter-Regular.woff2": "/react-sneakers/static/media/Inter-Regular.4c96ed73beaf6d1e6cc7.woff2",
+    "static/media/logo.png": "/react-sneakers/static/media/logo.ed203aaf99af537f996c.png",
+    "static/media/Inter-SemiBold.woff2": "/react-sneakers/static/media/Inter-SemiBold.90f5c90fdecd8895f496.woff2",
+    "static/media/complete-order.jpg": "/react-sneakers/static/media/complete-order.b997b2a143b197da5f98.jpg",
+    "static/media/empty-box.jpg": "/react-sneakers/static/media/empty-box.5f48c715c2be907ace60.jpg",
+    "static/media/heart-default.svg": "/react-sneakers/static/media/heart-default.01f05d2f02154594082845a756e8db14.svg",
+    "static/media/heart-liked.svg": "/react-sneakers/static/media/heart-liked.55482f4ba729feac8b2bda5242a5dff7.svg",
+    "static/media/button-added.svg": "/react-sneakers/static/media/button-added.890c21e6e092e231b04d7f8d3b23767a.svg",
+    "static/media/favorite.svg": "/react-sneakers/static/media/favorite.fb6fc173851dd67a64d51b7306e810d1.svg",
+    "static/media/remove-button-colored.svg": "/react-sneakers/static/media/remove-button-colored.e909f43442d1e9adf35f35e993be85f3.svg",
+    "static/media/profile.svg": "/react-sneakers/static/media/profile.381202f7e3edbc1a00b14fbd5e529a32.svg",
+    "static/media/cart.svg": "/react-sneakers/static/media/cart.5113b08fb682dc25f3856ef704a6c05d.svg",
+    "static/media/exit.svg": "/react-sneakers/static/media/exit.0daa653edefb8763e1ec81552a4cd668.svg",
+    "static/media/search.svg": "/react-sneakers/static/media/search.48c52bf5d459537e27c07f88eb08c050.svg",
+    "static/media/remove-button.svg": "/react-sneakers/static/media/remove-button.7238f6f58ca2a3490d5b3358a98b42ec.svg",
+    "static/media/button-plus.svg": "/react-sneakers/static/media/button-plus.b88e94c67ea7ac0cfa69033241c96b8c.svg",
+    "index.html": "/react-sneakers/index.html",
+    "main.6f6f1c52.css.map": "/react-sneakers/static/css/main.6f6f1c52.css.map",
+    "main.59a00292.js.map": "/react-sneakers/static/js/main.59a00292.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6f6f1c52.css",
+    "static/js/main.59a00292.js"
+  ]
+}
