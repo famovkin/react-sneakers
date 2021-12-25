@@ -361,7 +361,35 @@ a {
   background: #34ad4a;
 }
 
-.cart__message {
+@keyframes changing-btn-opacity {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.button_disabled {
+  cursor: default;
+  background: #bebebe;
+  animation: changing-btn-opacity 0.8s ease-in infinite;
+}
+
+.button_disabled:hover {
+  background: #bebebe;
+}
+
+.button_disabled:active {
+  background: #bebebe;
+}
+
+.message {
   text-align: center;
   margin: auto;
   display: flex;
@@ -369,18 +397,19 @@ a {
   align-items: center;
 }
 
-.cart__message-image {
+.message__image {
+  width: 120px;
   margin-bottom: 10px;
 }
 
-.cart__message-title {
+.message__title {
   font-weight: 600;
   font-size: 22px;
   line-height: 27px;
   margin-bottom: 5px;
 }
 
-.cart__message-subtitle {
+.message__subtitle {
   font-size: 16px;
   line-height: 24px;
   opacity: 0.4;

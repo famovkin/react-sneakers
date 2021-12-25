@@ -7,6 +7,7 @@ import Favorites from "./pages/Favorites";
 import Home from "./pages/Home";
 import { api } from "./utils/Api";
 import { ItemsContext } from "./contexts/ItemsContext";
+import { SetItemsContext } from "./contexts/SetItemsContext";
 
 function App() {
   const [items, setItems] = useState([]);
@@ -124,11 +125,13 @@ function App() {
   return (
     <div className="page">
       {isCartOpened && (
-        <Cart
-          cartItems={cartItems}
-          onClose={cartCloseHandler}
-          onRemoveItem={removeFromCartHandler}
-        />
+        <SetItemsContext.Provider value={{ setCartItems }}>
+          <Cart
+            cartItems={cartItems}
+            cartCloseHandler={cartCloseHandler}
+            onRemoveItem={removeFromCartHandler}
+          />
+        </SetItemsContext.Provider>
       )}
       <div className="page__wrapper">
         <ItemsContext.Provider value={{ items, cartItems, favoriteItems }}>

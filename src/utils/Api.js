@@ -12,11 +12,9 @@ class Api {
   }
 
   getInitialItems(endpoint) {
-    return fetch(`${this._baseUrl}${endpoint}`)
-      .then((res) => this._checkServerResponse(res))
-      .then((res) => {
-        return res;
-      });
+    return fetch(`${this._baseUrl}${endpoint}`).then((res) =>
+      this._checkServerResponse(res)
+    );
   }
 
   addItem(newItem, endpoint) {
@@ -31,11 +29,7 @@ class Api {
         isOnFav: newItem.isOnFav,
         isOnCart: newItem.isOnCart,
       }),
-    })
-      .then((res) => this._checkServerResponse(res))
-      .then((res) => {
-        return res;
-      });
+    }).then((res) => this._checkServerResponse(res));
   }
 
   removeItem(itemId, endpoint) {
@@ -45,15 +39,13 @@ class Api {
     }).then((res) => this._checkServerResponse(res));
   }
 
-  // changeStatus(itemId, endpoint, value) {
-  //   return fetch(`${this._baseUrl}${endpoint}/${itemId}`, {
-  //     method: "PUT",
-  //     headers: this._headers,
-  //     body: JSON.stringify({
-  //       isOnFav: value,
-  //     }),
-  //   }).then((res) => this._checkServerResponse(res));
-  // }
+  addOrder(order) {
+    return fetch(`${this._baseUrl}orders`, {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify({ items: order }),
+    }).then((res) => this._checkServerResponse(res));
+  }
 }
 
 export const api = new Api({

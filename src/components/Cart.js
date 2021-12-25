@@ -1,16 +1,45 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import empty_box from "../images/empty-box.jpg";
+import complete_order from "../images/complete-order.jpg";
 import remove_button from "../images/remove-button-colored.svg";
-import CartMessage from "./CartMessage";
+import Message from "./Message";
+import { SetItemsContext } from "../contexts/SetItemsContext";
+import { api } from "../utils/Api";
 
-function Cart({ cartItems, onClose, onRemoveItem }) {
+function Cart({ cartItems, cartCloseHandler, onRemoveItem }) {
+  const [isOrderCompleted, setIsOrderCompleted] = useState(false);
+  const [orderId, setOrderId] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const setState = useContext(SetItemsContext);
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  const completeOrder = async () => {
+    setIsLoading(true);
+    api
+      .addOrder(cartItems)
+      .then((response) => {
+        setOrderId(response.id);
+        setState.setCartItems((prev) => [...prev, response]);
+        setState.setCartItems([]);
+        setIsOrderCompleted(true);
+      })
+      .catch((error) => console.log(error))
+      .finally(() => console.log(1));
+
+    for (let i = 0; i < cartItems.length; i++) {
+      const item = cartItems[i];
+      await api.removeItem(item.id, "cart");
+      await delay(700);
+    }
+  };
+
   return (
     <div className="cart">
       <div className="cart__sidebar">
         <div className="cart__header">
           <h2 className="cart__title">Корзина</h2>
           <img
-            onClick={onClose}
+            onClick={cartCloseHandler}
             className="cart-item__remove-button"
             src={remove_button}
             alt="Крестик"
@@ -51,14 +80,24 @@ function Cart({ cartItems, onClose, onRemoveItem }) {
                 <p className="order-info__value">1074 руб.</p>
               </li>
             </ul>
-            <button className="button">Оформить заказ</button>
+            <button
+              disabled={isLoading}
+              onClick={completeOrder}
+              className={`button ${isLoading && "button_disabled"}`}
+            >
+              Оформить заказ
+            </button>
           </>
         ) : (
-          <CartMessage
-            img={empty_box}
-            title="Корзина пустая"
-            subtitle="Добавьте хотя бы один товар, чтобы оформить заказ"
-            onClose={onClose}
+          <Message
+            img={isOrderCompleted ? complete_order : empty_box}
+            title={isOrderCompleted ? "Заказ оформлен!" : "Корзина пустая"}
+            subtitle={
+              isOrderCompleted
+                ? `Ваш заказ #${orderId} скоро будет передан курьерской доставке`
+                : "Добавьте хотя бы один товар, чтобы оформить заказ"
+            }
+            onButtonClick={cartCloseHandler}
           />
         )}
       </div>
