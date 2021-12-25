@@ -113,6 +113,15 @@ a {
   margin-right: 10px;
 }
 
+.header__icon {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.header__icon:hover {
+  transform: scale(1.1);
+}
+
 .store {
   padding: 40px 60px;
 }

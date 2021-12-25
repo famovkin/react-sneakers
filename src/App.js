@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import "./App.css";
 import Cart from "./components/Cart";
 import Header from "./components/Header";
@@ -8,6 +8,8 @@ import Home from "./pages/Home";
 import { api } from "./utils/Api";
 import { ItemsContext } from "./contexts/ItemsContext";
 import { SetItemsContext } from "./contexts/SetItemsContext";
+import { AuthContext } from "./contexts/AuthContext";
+import Login from "./pages/Login";
 
 function App() {
   const [items, setItems] = useState([]);
@@ -16,6 +18,13 @@ function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isCartOpened, setIsCartOpened] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isAuth, setIsAuth] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("auth")) {
+      setIsAuth(true);
+    }
+  }, []);
 
   useEffect(() => {
     const getInitialData = async () => {
@@ -123,43 +132,61 @@ function App() {
   };
 
   return (
-    <div className="page">
-      {isCartOpened && (
-        <SetItemsContext.Provider value={{ setCartItems }}>
-          <Cart
-            cartItems={cartItems}
-            cartCloseHandler={cartCloseHandler}
-            onRemoveItem={removeFromCartHandler}
-          />
-        </SetItemsContext.Provider>
-      )}
-      <div className="page__wrapper">
-        <ItemsContext.Provider value={{ items, cartItems, favoriteItems }}>
-          <Header onOpenCart={cartOpenHandler} />
-          <Switch>
-            <Route path="/" exact>
-              <Home
-                searchQuery={searchQuery}
-                setSearchQuery={setSearchQuery}
-                searchedCards={searchedCards}
-                onAddToCart={onAddToCart}
-                onAddToFavorites={onAddToFavorites}
-                isLoading={isLoading}
-              />
-            </Route>
-            <Route path="/favorites" exact>
-              <Favorites
-                onAddToCart={onAddToCart}
-                onAddToFavorites={onAddToFavorites}
-              />
-            </Route>
-            <Route path="*">
-              <h1>404</h1>
-            </Route>
-          </Switch>
+    <AuthContext.Provider value={{ isAuth: isAuth, setIsAuth: setIsAuth }}>
+      <div className="page">
+        {isCartOpened && (
+          <SetItemsContext.Provider value={{ setCartItems: setCartItems }}>
+            <Cart
+              cartItems={cartItems}
+              cartCloseHandler={cartCloseHandler}
+              onRemoveItem={removeFromCartHandler}
+            />
+          </SetItemsContext.Provider>
+        )}
+        <ItemsContext.Provider
+          value={{
+            items: items,
+            cartItems: cartItems,
+            favoriteItems: favoriteItems,
+          }}
+        >
+          {isAuth ? (
+            <Switch>
+              <Route path="/" exact>
+                <div className="page__wrapper">
+                  <Header onOpenCart={cartOpenHandler} />
+                  <Home
+                    searchQuery={searchQuery}
+                    setSearchQuery={setSearchQuery}
+                    searchedCards={searchedCards}
+                    onAddToCart={onAddToCart}
+                    onAddToFavorites={onAddToFavorites}
+                    isLoading={isLoading}
+                  />
+                </div>
+              </Route>
+              <Route path="/favorites" exact>
+                <div className="page__wrapper">
+                  <Header onOpenCart={cartOpenHandler} />
+                  <Favorites
+                    onAddToCart={onAddToCart}
+                    onAddToFavorites={onAddToFavorites}
+                  />
+                </div>
+              </Route>
+              <Redirect to="/" />
+            </Switch>
+          ) : (
+            <Switch>
+              <Route path="/login">
+                <Login />
+              </Route>
+              <Redirect to="/login" />
+            </Switch>
+          )}
         </ItemsContext.Provider>
       </div>
-    </div>
+    </AuthContext.Provider>
   );
 }
 

@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import cart from "../images/cart.svg";
 import favorite from "../images/favorite.svg";
 import logo from "../images/logo.png";
+import exit from "../images/exit.svg";
 import profile from "../images/profile.svg";
+import { AuthContext } from "../contexts/AuthContext";
 
 function Header({ onOpenCart }) {
+  const { setIsAuth } = useContext(AuthContext);
+
+  const logout = () => {
+    setIsAuth(false);
+    localStorage.removeItem("auth");
+  };
+
   return (
     <header className="header">
       <div className="header__content">
@@ -20,20 +29,24 @@ function Header({ onOpenCart }) {
         </Link>
         <ul className="header__account">
           <li onClick={onOpenCart} className="header__cart">
-            <img className="header__cart-image" src={cart} alt="Корзина"></img>
+            <img className="header__cart-image" src={cart} alt="Корзина" />
             <span className="header__price">1205 руб.</span>
+          </li>
+          <li>
+            <img className="header__icon" src={profile} atl="Человек"></img>
           </li>
           <Link to="/favorites">
             <li>
-              <img
-                className="header__favorite"
-                src={favorite}
-                alt="Сердце"
-              ></img>
+              <img className="header__icon" src={favorite} alt="Сердце" />
             </li>
           </Link>
           <li>
-            <img className="header__profile" src={profile} atl="Человек"></img>
+            <img
+              onClick={logout}
+              className="header__icon"
+              src={exit}
+              alt="Выход"
+            ></img>
           </li>
         </ul>
       </div>
