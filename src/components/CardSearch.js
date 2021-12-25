@@ -5,7 +5,7 @@ import remove_button from "../images/remove-button.svg";
 function CardSearch({ search, setSearch }) {
   return (
     <div className="store__search">
-      <img className="store__search-image" src={searchImg} alt="Лупа"></img>
+      <img className="store__search-image" src={searchImg} alt="Лупа" />
       <input
         value={search}
         onChange={(event) => setSearch(event.target.value)}
@@ -18,7 +18,7 @@ function CardSearch({ search, setSearch }) {
         className="cart-item__remove-button cart-item__remove-button_type_input"
         src={remove_button}
         alt="Крестик"
-      ></img>
+      />
     </div>
   );
 }

@@ -22,7 +22,7 @@ function Header({ onOpenCart }) {
       <div className="header__content">
         <Link to="/">
           <div className="header__logo">
-            <img className="logo" src={logo} alt="Кроссовки"></img>
+            <img className="logo" src={logo} alt="Кроссовки" />
             <div className="header__logo-text">
               <h1 className="header__title">React Sneakers</h1>
               <p className="header__subtitle">Магазин лучших кроссовок</p>
@@ -36,7 +36,7 @@ function Header({ onOpenCart }) {
           </li>
           <Link to="/orders">
             <li>
-              <img className="header__icon" src={profile} atl="Человек"></img>
+              <img className="header__icon" src={profile} atl="Человек" />
             </li>
           </Link>
           <Link to="/favorites">
@@ -50,7 +50,7 @@ function Header({ onOpenCart }) {
               className="header__icon"
               src={exit}
               alt="Выход"
-            ></img>
+            />
           </li>
         </ul>
       </div>
