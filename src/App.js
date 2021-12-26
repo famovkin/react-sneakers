@@ -24,7 +24,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isAuth, setIsAuth] = useState(false);
   const [totalPages, setTotalPages] = useState(0);
-  const [limit, setLimit] = useState(8);
+  const [limit, setLimit] = useState(16);
   const [page, setPage] = useState(1);
   const [selectedSort, setSelectedSort] = useState("");
   const [isImagePopupOpened, setIsImagePopupOpened] = useState(false);
