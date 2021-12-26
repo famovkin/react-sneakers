@@ -12,6 +12,7 @@ import Orders from "./pages/Orders";
 import { api } from "./utils/Api";
 import { getPagesCount } from "./utils/pages";
 import Select from "./components/UI/Select";
+import PopupWithImage from "./components/PopupWithImage";
 
 function App() {
   const [items, setItems] = useState([]);
@@ -180,7 +181,7 @@ function App() {
         }}
       >
         <div className="page">
-          <div></div>
+          <PopupWithImage></PopupWithImage>
           <SetItemsContext.Provider value={{ setCartItems: setCartItems }}>
             <Cart
               cartItems={cartItems}

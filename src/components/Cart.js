@@ -51,7 +51,7 @@ function Cart({ cartItems, cartCloseHandler, onRemoveItem, isCartOpened }) {
           <h2 className="cart__title">Корзина</h2>
           <img
             onClick={closeCart}
-            className="cart-item__remove-button"
+            className="close-button"
             src={remove_button}
             alt="Крестик"
           />
@@ -63,7 +63,7 @@ function Cart({ cartItems, cartCloseHandler, onRemoveItem, isCartOpened }) {
                 <li key={index} className="cart-item">
                   <img
                     className="cart-item__image"
-                    src={item.imgUrl}
+                    src={process.env.PUBLIC_URL + item.imgUrl}
                     alt={item.title}
                   />
                   <div className="cart-item__text">
@@ -72,7 +72,7 @@ function Cart({ cartItems, cartCloseHandler, onRemoveItem, isCartOpened }) {
                   </div>
                   <img
                     onClick={() => onRemoveItem(item)}
-                    className="cart-item__remove-button"
+                    className="close-button"
                     src={remove_button}
                     alt="Крестик"
                   />

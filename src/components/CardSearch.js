@@ -13,12 +13,14 @@ function CardSearch({ search, setSearch }) {
         type="text"
         placeholder="Поиск..."
       ></input>
-      <img
-        onClick={() => setSearch("")}
-        className="cart-item__remove-button cart-item__remove-button_type_input"
-        src={remove_button}
-        alt="Крестик"
-      />
+      <button className="close-button close-button_type_input">
+        <img
+          className="close-button__image"
+          onClick={() => setSearch("")}
+          src={remove_button}
+          alt="Крестик"
+        />
+      </button>
     </div>
   );
 }

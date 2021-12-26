@@ -43,32 +43,38 @@ function Card({
       ) : (
         <>
           {onAddToFavorites && (
-            <img
-              onClick={favoriteHandler}
-              className="card__favorite"
-              src={
-                (isOnFavoritesPage && heartLiked) ||
-                state.favoriteItems.some(
-                  (item) => item.customId === card.customId
-                )
-                  ? heartLiked
-                  : heartDefault
-              }
-              alt="Серое сердце"
-            />
+            <button className="card-button card-button_type_favorite">
+              <img
+                onClick={favoriteHandler}
+                className="card-button__image"
+                src={
+                  (isOnFavoritesPage && heartLiked) ||
+                  state.favoriteItems.some(
+                    (item) => item.customId === card.customId
+                  )
+                    ? heartLiked
+                    : heartDefault
+                }
+                alt="Серое сердце"
+              />
+            </button>
           )}
-          <img className="card__image" src={card.imgUrl} alt={card.title} />
+          <img
+            className="card__image"
+            src={process.env.PUBLIC_URL + card.imgUrl}
+            alt={card.title}
+          />
           <p className="card__title">{card.title}</p>
           <div className="card__buy">
             <div className="card__price">
               <p className="card__price-title">Цена:</p>
               <p className="card__price-value">{card.price} руб.</p>
             </div>
-            <button className="card__add-button">
+            <button className="card-button">
               {onAddToCart && (
                 <img
                   onClick={cartHandler}
-                  className="card__add-button-image"
+                  className="card-button__image"
                   src={
                     state.cartItems.some(
                       (item) => item.customId === card.customId
