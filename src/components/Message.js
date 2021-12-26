@@ -7,6 +7,7 @@ function Message({
   img,
   title,
   subtitle,
+  alt,
   onButtonClick,
   removeButton = false,
 }) {
@@ -14,7 +15,7 @@ function Message({
 
   return (
     <div className="message">
-      <img className="message__image" src={img} alt="#" />
+      <img className="message__image" src={img} alt={alt} />
       <h3 className="message__title">{title}</h3>
       <p className="message__subtitle">{subtitle}</p>
       {!removeButton && (

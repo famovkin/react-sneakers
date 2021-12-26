@@ -1,13 +1,13 @@
-import React, { useState, useContext } from "react";
-import empty_box from "../images/empty-box.jpg";
-import complete_order from "../images/complete-order.jpg";
-import remove_button from "../images/remove-button-colored.svg";
-import Message from "./Message";
+import React, { useContext, useState } from "react";
 import { SetItemsContext } from "../contexts/SetItemsContext";
-import { api } from "../utils/Api";
 import { useCheckout } from "../hooks/useCheckout";
-import Button from "./UI/Button";
+import complete_order from "../images/complete-order.jpg";
+import empty_box from "../images/empty-box.jpg";
+import remove_button from "../images/remove-button-colored.svg";
 import right_arrow from "../images/right-arrow.svg";
+import { api } from "../utils/Api";
+import Message from "./Message";
+import Button from "./UI/Button";
 
 function Cart({ cartItems, cartCloseHandler, onRemoveItem, isCartOpened }) {
   const [isOrderCompleted, setIsOrderCompleted] = useState(false);
@@ -114,6 +114,7 @@ function Cart({ cartItems, cartCloseHandler, onRemoveItem, isCartOpened }) {
                 ? `Ваш заказ #${orderId} скоро будет передан курьерской доставке`
                 : "Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."
             }
+            alt={isOrderCompleted ? "Документ с галочкой" : "Пустая корзина"}
             onButtonClick={closeCart}
           />
         )}

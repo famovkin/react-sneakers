@@ -1,12 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Card from "../components/Card";
-import { ItemsContext } from "../contexts/ItemsContext";
 import Header from "../components/Header";
 import Message from "../components/Message";
-import emoji from "../images/emoji/emoji-1.png";
+import { ItemsContext } from "../contexts/ItemsContext";
+import { getRandomNumber } from "../utils/pages";
 
 function Favorites({ onAddToCart, onAddToFavorites, onOpenCart }) {
   const state = useContext(ItemsContext);
+  const [numberForEmoji, setNumberForEmoji] = useState(1);
+
+  useEffect(() => {
+    setNumberForEmoji(getRandomNumber(1, 10));
+  }, []);
 
   return (
     <div className="page__wrapper">
@@ -28,9 +33,13 @@ function Favorites({ onAddToCart, onAddToFavorites, onOpenCart }) {
             ))
           ) : (
             <Message
-              img={emoji}
+              img={
+                process.env.PUBLIC_URL +
+                `/images/emoji/emoji-${numberForEmoji}.png`
+              }
               title="Закладок нет :("
               subtitle="Вы ничего не добавляли в закладки"
+              alt="Смайлик"
             />
           )}
         </ul>

@@ -10,3 +10,7 @@ export const createEmptyArray = (number) => {
 
   return resultArray;
 };
+
+export const getRandomNumber = (min, max) => {
+  return Math.ceil(Math.random() * (max - min + 1));
+};

@@ -3,13 +3,15 @@ import CardList from "../components/CardList";
 import Header from "../components/Header";
 import Message from "../components/Message";
 import { api } from "../utils/Api";
-import emoji from "../images/emoji/emoji-2.png";
+import { createEmptyArray, getRandomNumber } from "../utils/pages";
 
 function Orders({ onOpenCart }) {
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [numberForEmoji, setNumberForEmoji] = useState(1);
 
   useEffect(() => {
+    setNumberForEmoji(getRandomNumber(1, 10));
     setIsLoading(true);
     api
       .getInitialItems("orders")
@@ -24,7 +26,9 @@ function Orders({ onOpenCart }) {
       );
   }, []);
 
-  const emptyArray = [{}, {}, {}, {}];
+  useEffect(() => {});
+
+  const emptyArray = createEmptyArray(4);
 
   return (
     <div className="page__wrapper">
@@ -36,9 +40,13 @@ function Orders({ onOpenCart }) {
         {orders.length === 0 && !isLoading && (
           <>
             <Message
-              img={emoji}
+              img={
+                process.env.PUBLIC_URL +
+                `/images/emoji/emoji-${numberForEmoji}.png`
+              }
               title="У вас нет заказов"
               subtitle="Самое время совершить первую покупку"
+              alt="Смайлик"
             />
           </>
         )}

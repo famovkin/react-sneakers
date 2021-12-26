@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CardList from "../components/CardList";
 import CardSearch from "../components/CardSearch";
 import Header from "../components/Header";
 import Message from "../components/Message";
-import emoji from "../images/emoji/emoji-3.png";
-import { createEmptyArray } from "../utils/pages";
+import { createEmptyArray, getRandomNumber } from "../utils/pages";
 
 function Home({
   searchQuery,
@@ -17,8 +16,13 @@ function Home({
   children,
   cardsCount,
 }) {
+  const [numberForEmoji, setNumberForEmoji] = useState(1);
+  console.log(numberForEmoji);
+
+  useEffect(() => {
+    setNumberForEmoji(getRandomNumber(1, 10));
+  }, [searchQuery]);
   const emptyArray = createEmptyArray(cardsCount);
-  console.log(emptyArray);
 
   return (
     <div className="page__wrapper">
@@ -33,10 +37,14 @@ function Home({
         </div>
         {searchedCards.length === 0 && searchQuery ? (
           <Message
-            img={emoji}
+            img={
+              process.env.PUBLIC_URL +
+              `/images/emoji/emoji-${numberForEmoji}.png`
+            }
             title="Нет результатов"
             subtitle="Попробуйте найти что-нибудь другое"
             removeButton="true"
+            alt="Смайлик"
           />
         ) : (
           <CardList
