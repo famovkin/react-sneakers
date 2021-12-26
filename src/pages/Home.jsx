@@ -23,9 +23,10 @@ function Home({
       <section className="store">
         <div className="store__header">
           <h2 className="store__title">
-            {searchQuery ? `Поиск по запросу: ${searchQuery}` : "Все кроссовки"}
+            {searchQuery ? `Поиск по: ${searchQuery}` : "Все кроссовки"}
           </h2>
           <CardSearch search={searchQuery} setSearch={setSearchQuery} />
+          {children}
         </div>
         {searchedCards.length === 0 && searchQuery ? (
           <Message
@@ -42,7 +43,6 @@ function Home({
             isLoading={isLoading}
           />
         )}
-        {children}
       </section>
     </div>
   );

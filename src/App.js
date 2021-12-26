@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import Orders from "./pages/Orders";
 import { api } from "./utils/Api";
 import { getPagesCount } from "./utils/pages";
+import Select from "./components/UI/Select";
 
 function App() {
   const [items, setItems] = useState([]);
@@ -23,6 +24,7 @@ function App() {
   const [totalPages, setTotalPages] = useState(0);
   const [limit, setLimit] = useState(8);
   const [page, setPage] = useState(1);
+  const [selectedSort, setSelectedSort] = useState("");
 
   const lastElement = useRef();
   const observer = useRef();
@@ -156,6 +158,18 @@ function App() {
     }
   };
 
+  const sortItems = (sort) => {
+    setSelectedSort(sort);
+    {
+      sort === "ascending" &&
+        setItems([...items].sort((a, b) => a["price"] - b["price"]));
+    }
+    {
+      sort === "descending" &&
+        setItems([...items].sort((a, b) => b["price"] - a["price"]));
+    }
+  };
+
   return (
     <AuthContext.Provider value={{ isAuth: isAuth, setIsAuth: setIsAuth }}>
       <ItemsContext.Provider
@@ -166,6 +180,7 @@ function App() {
         }}
       >
         <div className="page">
+          <div></div>
           <SetItemsContext.Provider value={{ setCartItems: setCartItems }}>
             <Cart
               cartItems={cartItems}
@@ -185,7 +200,17 @@ function App() {
                   onAddToFavorites={onAddToFavorites}
                   onOpenCart={cartOpenHandler}
                   isLoading={isLoading}
-                />
+                >
+                  <Select
+                    value={selectedSort}
+                    onChange={sortItems}
+                    defaultValue="Сортировка"
+                    options={[
+                      { value: "descending", name: "По убыванию" },
+                      { value: "ascending", name: "По возрастанию" },
+                    ]}
+                  ></Select>
+                </Home>
               </Route>
               <Route path="/favorites">
                 <Favorites

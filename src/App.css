@@ -33,7 +33,7 @@ a {
   margin: auto;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
   border-radius: 20px;
-  min-height: 90vh;
+  min-height: 88vh;
 }
 
 .header {
@@ -151,13 +151,14 @@ a {
   border-radius: 10px;
   padding: 10px 15px;
   max-width: 250px;
+  margin-right: 5px;
 }
 
 .store__input {
   border: none;
   outline: none;
   width: 100%;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 17px;
 }
 
@@ -544,4 +545,17 @@ a {
 .order__title {
   margin-bottom: 25px;
   font-size: 23px;
+}
+
+.select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  outline: none;
+  box-shadow: none;
+  border: 1px solid #f3f3f3;
+  padding: 0 5px;
+  border-radius: 10px;
+  text-align: center;
+  color: #757575;
 }
