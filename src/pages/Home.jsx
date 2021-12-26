@@ -4,6 +4,7 @@ import CardSearch from "../components/CardSearch";
 import Header from "../components/Header";
 import Message from "../components/Message";
 import emoji from "../images/emoji/emoji-3.png";
+import { createEmptyArray } from "../utils/pages";
 
 function Home({
   searchQuery,
@@ -14,8 +15,10 @@ function Home({
   onOpenCart,
   isLoading,
   children,
+  cardsCount,
 }) {
-  const emptyArray = [{}, {}, {}, {}, {}, {}, {}, {}];
+  const emptyArray = createEmptyArray(cardsCount);
+  console.log(emptyArray);
 
   return (
     <div className="page__wrapper">

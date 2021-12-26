@@ -226,6 +226,7 @@ function App() {
                     onAddToFavorites={onAddToFavorites}
                     onOpenCart={cartOpenHandler}
                     isLoading={isLoading}
+                    cardsCount={items.length}
                   >
                     <Select
                       value={selectedSort}
