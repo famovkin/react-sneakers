@@ -5,6 +5,7 @@ import plusDefault from "../images/button-plus.svg";
 import heartDefault from "../images/heart-default.svg";
 import heartLiked from "../images/heart-liked.svg";
 import { ItemsContext } from "../contexts/ItemsContext";
+import { PopupsContext } from "../contexts/PopupsContext";
 
 function Card({
   card,
@@ -22,6 +23,12 @@ function Card({
   };
 
   const state = useContext(ItemsContext);
+  const {
+    isImagePopupOpened,
+    setIsImagePopupOpened,
+    openImagePopup,
+    closeImagePopup,
+  } = useContext(PopupsContext);
 
   return (
     <li className="card">
@@ -60,6 +67,7 @@ function Card({
             </button>
           )}
           <img
+            onClick={() => openImagePopup(card)}
             className="card__image"
             src={process.env.PUBLIC_URL + card.imgUrl}
             alt={card.title}

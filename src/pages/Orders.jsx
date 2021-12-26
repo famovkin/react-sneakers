@@ -14,7 +14,7 @@ function Orders({ onOpenCart }) {
     api
       .getInitialItems("orders")
       .then((response) => {
-        setOrders(response);
+        setOrders(response.reverse());
       })
       .catch((error) => console.log(error))
       .finally(() =>

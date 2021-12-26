@@ -5,6 +5,7 @@ import Cart from "./components/Cart";
 import { AuthContext } from "./contexts/AuthContext";
 import { ItemsContext } from "./contexts/ItemsContext";
 import { SetItemsContext } from "./contexts/SetItemsContext";
+import { PopupsContext } from "./contexts/PopupsContext";
 import Favorites from "./pages/Favorites";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -26,9 +27,21 @@ function App() {
   const [limit, setLimit] = useState(8);
   const [page, setPage] = useState(1);
   const [selectedSort, setSelectedSort] = useState("");
+  const [isImagePopupOpened, setIsImagePopupOpened] = useState(false);
+  const [selectedCard, setSelectedCard] = useState({});
 
   const lastElement = useRef();
   const observer = useRef();
+
+  const openImagePopup = (card) => {
+    setIsImagePopupOpened(true);
+    setSelectedCard(card);
+  };
+
+  const closeImagePopup = () => {
+    setIsImagePopupOpened(false);
+    setSelectedSort({});
+  };
 
   useEffect(() => {
     if (localStorage.getItem("auth")) {
@@ -173,69 +186,82 @@ function App() {
 
   return (
     <AuthContext.Provider value={{ isAuth: isAuth, setIsAuth: setIsAuth }}>
-      <ItemsContext.Provider
+      <PopupsContext.Provider
         value={{
-          items: items,
-          cartItems: cartItems,
-          favoriteItems: favoriteItems,
+          isImagePopupOpened: isImagePopupOpened,
+          setIsImagePopupOpened: setIsImagePopupOpened,
+          openImagePopup: openImagePopup,
+          closeImagePopup: closeImagePopup,
         }}
       >
-        <div className="page">
-          <PopupWithImage></PopupWithImage>
-          <SetItemsContext.Provider value={{ setCartItems: setCartItems }}>
-            <Cart
-              cartItems={cartItems}
-              cartCloseHandler={cartCloseHandler}
-              onRemoveItem={removeFromCartHandler}
-              isCartOpened={isCartOpened}
-            />
-          </SetItemsContext.Provider>
-          {isAuth ? (
-            <Switch>
-              <Route path="/" exact>
-                <Home
-                  searchQuery={searchQuery}
-                  setSearchQuery={setSearchQuery}
-                  searchedCards={searchedCards}
-                  onAddToCart={onAddToCart}
-                  onAddToFavorites={onAddToFavorites}
-                  onOpenCart={cartOpenHandler}
-                  isLoading={isLoading}
-                >
-                  <Select
-                    value={selectedSort}
-                    onChange={sortItems}
-                    defaultValue="Сортировка"
-                    options={[
-                      { value: "descending", name: "По убыванию" },
-                      { value: "ascending", name: "По возрастанию" },
-                    ]}
-                  ></Select>
-                </Home>
-              </Route>
-              <Route path="/favorites">
-                <Favorites
-                  onAddToCart={onAddToCart}
-                  onAddToFavorites={onAddToFavorites}
-                  onOpenCart={cartOpenHandler}
-                />
-              </Route>
-              <Route path="/orders">
-                <Orders onOpenCart={cartOpenHandler} />
-              </Route>
-              <Redirect to="/" />
-            </Switch>
-          ) : (
-            <Switch>
-              <Route path="/login">
-                <Login />
-              </Route>
-              <Redirect to="/login" />
-            </Switch>
-          )}
-          <div ref={lastElement}></div>
-        </div>
-      </ItemsContext.Provider>
+        <ItemsContext.Provider
+          value={{
+            items: items,
+            cartItems: cartItems,
+            favoriteItems: favoriteItems,
+          }}
+        >
+          <div className="page">
+            <PopupWithImage
+              isImagePopupOpened={isImagePopupOpened}
+              selectedCard={selectedCard}
+              closeImagePopup={closeImagePopup}
+            ></PopupWithImage>
+            <SetItemsContext.Provider value={{ setCartItems: setCartItems }}>
+              <Cart
+                cartItems={cartItems}
+                cartCloseHandler={cartCloseHandler}
+                onRemoveItem={removeFromCartHandler}
+                isCartOpened={isCartOpened}
+              />
+            </SetItemsContext.Provider>
+            {isAuth ? (
+              <Switch>
+                <Route path="/" exact>
+                  <Home
+                    searchQuery={searchQuery}
+                    setSearchQuery={setSearchQuery}
+                    searchedCards={searchedCards}
+                    onAddToCart={onAddToCart}
+                    onAddToFavorites={onAddToFavorites}
+                    onOpenCart={cartOpenHandler}
+                    isLoading={isLoading}
+                  >
+                    <Select
+                      value={selectedSort}
+                      onChange={sortItems}
+                      defaultValue="Сортировка"
+                      options={[
+                        { value: "descending", name: "По убыванию" },
+                        { value: "ascending", name: "По возрастанию" },
+                      ]}
+                    ></Select>
+                  </Home>
+                </Route>
+                <Route path="/favorites">
+                  <Favorites
+                    onAddToCart={onAddToCart}
+                    onAddToFavorites={onAddToFavorites}
+                    onOpenCart={cartOpenHandler}
+                  />
+                </Route>
+                <Route path="/orders">
+                  <Orders onOpenCart={cartOpenHandler} />
+                </Route>
+                <Redirect to="/" />
+              </Switch>
+            ) : (
+              <Switch>
+                <Route path="/login">
+                  <Login />
+                </Route>
+                <Redirect to="/login" />
+              </Switch>
+            )}
+            <div ref={lastElement}></div>
+          </div>
+        </ItemsContext.Provider>
+      </PopupsContext.Provider>
     </AuthContext.Provider>
   );
 }
