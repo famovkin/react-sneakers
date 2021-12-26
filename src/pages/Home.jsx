@@ -17,7 +17,6 @@ function Home({
   cardsCount,
 }) {
   const [numberForEmoji, setNumberForEmoji] = useState(1);
-  console.log(numberForEmoji);
 
   useEffect(() => {
     setNumberForEmoji(getRandomNumber(1, 10));
