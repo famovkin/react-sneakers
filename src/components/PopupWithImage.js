@@ -3,8 +3,16 @@ import close_button from "../images/remove-button-colored.svg";
 
 function PopupWithImage(props) {
   return (
-    <div className={`popup ${props.isImagePopupOpened && "popup_opened"}`}>
-      <div className="popup__container">
+    <div
+      onClick={props.closeImagePopup}
+      className={`popup ${props.isImagePopupOpened && "popup_opened"}`}
+    >
+      <div
+        onClick={(event) => {
+          event.stopPropagation();
+        }}
+        className="popup__container"
+      >
         <img
           className="popup__image"
           src={process.env.PUBLIC_URL + props.selectedCard.imgUrl}
