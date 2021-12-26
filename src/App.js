@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useRef } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Cart from "./components/Cart";
@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Orders from "./pages/Orders";
 import { api } from "./utils/Api";
+import { getPagesCount } from "./utils/pages";
 
 function App() {
   const [items, setItems] = useState([]);
@@ -19,6 +20,12 @@ function App() {
   const [isCartOpened, setIsCartOpened] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isAuth, setIsAuth] = useState(false);
+  const [totalPages, setTotalPages] = useState(0);
+  const [limit, setLimit] = useState(8);
+  const [page, setPage] = useState(1);
+
+  const lastElement = useRef();
+  const observer = useRef();
 
   useEffect(() => {
     if (localStorage.getItem("auth")) {
@@ -27,9 +34,44 @@ function App() {
   }, []);
 
   useEffect(() => {
+    // получить кол-во страниц
+    api
+      .getInitialItems("items")
+      .then((response) => {
+        const totalCountItems = response.length;
+        setTotalPages(getPagesCount(totalCountItems, limit));
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  useEffect(() => {
+    setIsLoading(true);
+    api
+      .getInitialItems("items", limit, page)
+      .then((response) => setItems([...items, ...response]))
+      .finally(() =>
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 2000)
+      );
+  }, [page]);
+
+  useEffect(() => {
+    if (isLoading) return;
+    if (observer.current) observer.current.disconnect();
+    var callback = function (entries, observer) {
+      if (entries[0].isIntersecting && page < totalPages) {
+        setPage(page + 1);
+      }
+    };
+    observer.current = new IntersectionObserver(callback);
+    observer.current.observe(lastElement.current);
+  }, [isLoading]);
+
+  useEffect(() => {
     setIsLoading(true);
     Promise.all([
-      api.getInitialItems("items"),
+      api.getInitialItems("items", limit, page),
       api.getInitialItems("cart"),
       api.getInitialItems("favorites"),
     ])
@@ -165,6 +207,7 @@ function App() {
               <Redirect to="/login" />
             </Switch>
           )}
+          <div ref={lastElement}></div>
         </div>
       </ItemsContext.Provider>
     </AuthContext.Provider>

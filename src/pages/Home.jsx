@@ -13,8 +13,10 @@ function Home({
   onAddToFavorites,
   onOpenCart,
   isLoading,
+  children,
 }) {
   const emptyArray = [{}, {}, {}, {}, {}, {}, {}, {}];
+
   return (
     <div className="page__wrapper">
       <Header onOpenCart={onOpenCart} />
@@ -40,6 +42,7 @@ function Home({
             isLoading={isLoading}
           />
         )}
+        {children}
       </section>
     </div>
   );

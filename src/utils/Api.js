@@ -11,10 +11,16 @@ class Api {
     return Promise.reject(`Что-то пошло не так. Обратитесь к разработчику`);
   }
 
-  getInitialItems(endpoint) {
-    return fetch(`${this._baseUrl}${endpoint}`).then((res) =>
-      this._checkServerResponse(res)
-    );
+  getInitialItems(endpoint, limit, page) {
+    if (limit) {
+      return fetch(
+        `${this._baseUrl}${endpoint}?page=${page}&limit=${limit}`
+      ).then((res) => this._checkServerResponse(res));
+    } else {
+      return fetch(`${this._baseUrl}${endpoint}`).then((res) => {
+        return this._checkServerResponse(res);
+      });
+    }
   }
 
   addItem(newItem, endpoint) {
