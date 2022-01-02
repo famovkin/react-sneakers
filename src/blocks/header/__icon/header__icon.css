@@ -1,0 +1,24 @@
+.header__icon {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.header__icon:hover {
+  transform: scale(1.1);
+}
+
+.header__icon:active {
+  transform: scale(1);
+}
+
+@media (max-width: 800px) {
+  .header__icon {
+    width: 27px;
+  }
+}
+
+@media (max-width: 500px) {
+  .header__icon {
+    width: 20px;
+  }
+}

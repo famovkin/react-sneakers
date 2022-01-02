@@ -1,0 +1,12 @@
+.message__title {
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 27px;
+  margin-bottom: 5px;
+}
+
+@media (max-width: 500px) {
+  .message__title {
+    font-size: 18px;
+  }
+}

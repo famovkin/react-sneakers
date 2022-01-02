@@ -1,0 +1,18 @@
+.page {
+  min-width: 320px;
+  min-height: 100vh;
+  padding: 35px 0;
+  height: 100%;
+  background-image: linear-gradient(
+    to left,
+    #f3e7e9 0%,
+    #e3eeff 99%,
+    #e3eeff 100%
+  );
+}
+
+@media (max-width: 800px) {
+  .page {
+    padding: 25px 0;
+  }
+}

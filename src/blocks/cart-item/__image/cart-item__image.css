@@ -1,0 +1,6 @@
+.cart-item__image {
+  display: block;
+  max-width: 80px;
+  object-fit: contain;
+  margin-right: 20px;
+}

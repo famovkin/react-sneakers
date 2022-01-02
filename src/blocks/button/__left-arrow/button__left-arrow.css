@@ -1,0 +1,21 @@
+.button__left-arrow {
+  animation: shaking-left-arrow 1.6s infinite ease-in;
+}
+
+@keyframes shaking-left-arrow {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateX(0);
+  }
+
+  40% {
+    transform: translateX(-10px);
+  }
+
+  60% {
+    transform: translateX(-8px);
+  }
+}

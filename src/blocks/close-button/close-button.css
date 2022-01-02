@@ -1,0 +1,20 @@
+.close-button {
+  display: block;
+  opacity: 0.5;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: transparent;
+  display: block;
+  flex-basis: 32px;
+}
+
+.close-button:hover {
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+.close-button:active {
+  transform: scale(0.97);
+}

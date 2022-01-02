@@ -1,0 +1,17 @@
+.header__logo {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+@media (max-width: 800px) {
+  .header__logo {
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 500px) {
+  .header__logo {
+    margin-bottom: 15px;
+  }
+}

@@ -1,0 +1,11 @@
+.order {
+  border-bottom: 1px solid #d8e6fc;
+  margin-bottom: 40px;
+  padding-bottom: 40px;
+}
+
+.order:last-child {
+  border: none;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}

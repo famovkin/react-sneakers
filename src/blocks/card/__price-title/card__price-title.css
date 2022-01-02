@@ -1,0 +1,8 @@
+.card__price-title {
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  text-transform: uppercase;
+  color: #bdbdbd;
+  margin-bottom: 3px;
+}

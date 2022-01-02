@@ -1,0 +1,9 @@
+.popup__title {
+  color: #fff;
+}
+
+@media (max-width: 500px) {
+  .popup__title {
+    font-size: 13px;
+  }
+}

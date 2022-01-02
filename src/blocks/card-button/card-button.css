@@ -1,0 +1,15 @@
+.card-button {
+  cursor: pointer;
+  color: transparent;
+  background: transparent;
+  border: none;
+  display: block;
+  transition: all 0.1s ease-out;
+}
+.card-button:active {
+  transform: scale(0.9);
+}
+
+.card-button__image {
+  width: 32px;
+}

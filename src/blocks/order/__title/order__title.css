@@ -1,0 +1,10 @@
+.order__title {
+  margin-bottom: 17px;
+  font-size: 23px;
+}
+
+@media (max-width: 800px) {
+  .order__title {
+    text-align: center;
+  }
+}

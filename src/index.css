@@ -1,1 +1,87 @@
 @import url(./vendor/fonts/fonts.css);
+
+@import url(./blocks/page/page.css);
+@import url(./blocks/page/__wrapper/page__wrapper.css);
+@import url(./blocks/header/header.css);
+@import url(./blocks/header/__content/header__content.css);
+@import url(./blocks/header/__logo/header__logo.css);
+@import url(./blocks/header/__logo-text/header__logo-text.css);
+@import url(./blocks/header/__title/header__title.css);
+@import url(./blocks/header/__subtitle/header__subtitle.css);
+@import url(./blocks/header/__account/header__account.css);
+@import url(./blocks/header/__cart/header__cart.css);
+@import url(./blocks/header/__price/header__price.css);
+@import url(./blocks/header/__cart-image/header__cart-image.css);
+@import url(./blocks/header/__icon/header__icon.css);
+
+@import url(./blocks/logo/logo.css);
+@import url(./blocks/logo/_type/logo_type_login.css);
+
+@import url(./blocks/store/store.css);
+@import url(./blocks/store/__header/store__header.css);
+@import url(./blocks/store/__title/store__title.css);
+@import url(./blocks/store/__search/store__search.css);
+@import url(./blocks/store/__input/store__input.css);
+
+@import url(./blocks/cards-grid/cards-grid.css);
+
+@import url(./blocks/card/card.css);
+@import url(./blocks/card/__title/card__title.css);
+@import url(./blocks/card/__price-title/card__price-title.css);
+@import url(./blocks/card/__price-value/card__price-value.css);
+@import url(./blocks/card/__image/card__image.css);
+@import url(./blocks/card/__buy/card__buy.css);
+
+@import url(./blocks/card-button/card-button.css);
+@import url(./blocks/card-button/_type/card-button_type_favorite.css);
+
+@import url(./blocks/cart/cart.css);
+@import url(./blocks/cart/_visible/cart_visible.css);
+@import url(./blocks/cart/__sidebar/cart__sidebar.css);
+@import url(./blocks/cart/__sidebar/_visible/cart__sidebar_visible.css);
+@import url(./blocks/cart/__header/cart__header.css);
+@import url(./blocks/cart/__title/cart__title.css);
+@import url(./blocks/cart/__items/cart__items.css);
+
+@import url(./blocks/cart-item/cart-item.css);
+@import url(./blocks/cart-item/__image/cart-item__image.css);
+@import url(./blocks/cart-item/__text/cart-item__text.css);
+@import url(./blocks/cart-item/__title/cart-item__title.css);
+@import url(./blocks/cart-item/__price/cart-item__price.css);
+
+@import url(./blocks/close-button/close-button.css);
+@import url(./blocks/close-button/_type/close-button_type_input.css);
+@import url(./blocks/close-button/_type/close-button_type_popup.css);
+@import url(./blocks/close-button/__image/close-button__image.css);
+
+@import url(./blocks/order-info/order-info.css);
+@import url(./blocks/order-info/__content/order-info__content.css);
+@import url(./blocks/order-info/__value/order-info__value.css);
+@import url(./blocks/order-info/__dots/order-info__dots.css);
+
+@import url(./blocks/button/button.css);
+@import url(./blocks/button/_type/button_type_login.css);
+@import url(./blocks/button/__left-arrow/button__left-arrow.css);
+@import url(./blocks/button/__right-arrow/button__right-arrow.css);
+@import url(./blocks/button/_disabled/button_disabled.css);
+
+@import url(./blocks/message/message.css);
+@import url(./blocks/message/__image/message__image.css);
+@import url(./blocks/message/__title/message__title.css);
+@import url(./blocks/message/__subtitle/message__subtitle.css);
+
+@import url(./blocks/login/login.css);
+@import url(./blocks/login/__form/login__form.css);
+@import url(./blocks/login/__title/login__title.css);
+
+@import url(./blocks/input/input.css);
+
+@import url(./blocks/order/order.css);
+@import url(./blocks/order/__title/order__title.css);
+
+@import url(./blocks/select/select.css);
+
+@import url(./blocks/popup/popup.css);
+@import url(./blocks/popup/_opened/popup_opened.css);
+@import url(./blocks/popup/__container/popup__container.css);
+@import url(./blocks/popup/__image/popup__image.css);

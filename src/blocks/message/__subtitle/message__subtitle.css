@@ -1,0 +1,12 @@
+.message__subtitle {
+  font-size: 16px;
+  line-height: 24px;
+  opacity: 0.4;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 500px) {
+  .message__subtitle {
+    font-size: 14px;
+  }
+}

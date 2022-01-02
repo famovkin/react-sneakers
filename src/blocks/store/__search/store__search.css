@@ -1,0 +1,26 @@
+.store__search {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  border: 1px solid #f3f3f3;
+  box-sizing: border-box;
+  border-radius: 10px;
+  padding: 10px 15px;
+  max-width: 250px;
+  margin-right: 5px;
+}
+
+@media (max-width: 800px) {
+  .store__search {
+    max-width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 500px) {
+  .store__search {
+    padding: 5px 8px;
+    margin-bottom: 5px;
+  }
+}

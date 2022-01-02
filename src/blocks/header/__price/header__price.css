@@ -1,0 +1,5 @@
+.header__price {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

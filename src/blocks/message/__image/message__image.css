@@ -1,0 +1,10 @@
+.message__image {
+  width: 90px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 500px) {
+  .message__image {
+    width: 70px;
+  }
+}

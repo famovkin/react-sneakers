@@ -1,0 +1,5 @@
+@media (max-width: 500px) {
+  .header__logo-text {
+    text-align: right;
+  }
+}

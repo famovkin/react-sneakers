@@ -1,0 +1,7 @@
+.popup__image {
+  width: 100%;
+  margin-bottom: 10px;
+  display: block;
+  border-radius: 10px;
+  overflow: hidden;
+}

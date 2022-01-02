@@ -1,0 +1,22 @@
+.select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  outline: none;
+  box-shadow: none;
+  border: 1px solid #f3f3f3;
+  padding: 0 5px;
+  border-radius: 10px;
+  text-align: center;
+  color: #757575;
+  cursor: pointer;
+  max-width: 160px;
+  height: 54px;
+}
+
+@media (max-width: 800px) {
+  .select {
+    height: 30px;
+    max-width: 120px;
+  }
+}

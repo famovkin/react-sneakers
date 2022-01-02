@@ -1,0 +1,21 @@
+.header__cart {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  max-width: 200px;
+  transition: all 0.3s ease-in-out;
+  border: 1px solid #f3f3f3;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.header__cart:hover {
+  box-shadow: 0px 2px 10px rgb(0 0 0 / 15%);
+}
+
+@media (max-width: 500px) {
+  .header__cart {
+    padding: 8px;
+    max-width: 130px;
+  }
+}

@@ -1,0 +1,6 @@
+.cart__items {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  padding-right: 10px;
+}

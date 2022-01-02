@@ -1,0 +1,13 @@
+.cart__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 500px) {
+  .cart__header {
+    margin-bottom: 15px;
+  }
+}

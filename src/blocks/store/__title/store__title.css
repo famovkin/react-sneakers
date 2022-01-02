@@ -1,0 +1,26 @@
+.store__title {
+  display: block;
+  width: 600px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  align-self: center;
+  font-size: 35px;
+}
+
+@media (max-width: 800px) {
+  .store__title {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 10px;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 500px) {
+  .store__title {
+    text-align: center;
+    font-size: 25px;
+    max-width: 250px;
+  }
+}

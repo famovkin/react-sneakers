@@ -1,0 +1,26 @@
+.cart__sidebar {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background: #fff;
+  height: 100%;
+  right: 0;
+  bottom: 0;
+  width: 385px;
+  box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.15);
+  padding: 30px;
+  transform: translateX(100%);
+  transition: all 0.2s ease-in-out;
+}
+
+@media (max-width: 800px) {
+  .cart__sidebar {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  .cart__sidebar {
+    width: 100%;
+  }
+}

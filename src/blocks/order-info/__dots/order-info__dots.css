@@ -1,0 +1,6 @@
+.order-info__dots {
+  align-self: flex-end;
+  flex: 0.9;
+  border-bottom: 1px dashed #dfdfdf;
+  margin: 7px;
+}

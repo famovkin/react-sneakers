@@ -1,0 +1,27 @@
+.button_disabled {
+  cursor: default;
+  background: #bebebe;
+  animation: changing-btn-opacity 0.8s ease-in infinite;
+}
+
+.button_disabled:hover {
+  background: #bebebe;
+}
+
+.button_disabled:active {
+  background: #bebebe;
+}
+
+@keyframes changing-btn-opacity {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

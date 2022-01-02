@@ -1,0 +1,6 @@
+.card__image {
+  display: block;
+  width: 100%;
+  margin-bottom: 14px;
+  cursor: pointer;
+}

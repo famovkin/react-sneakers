@@ -1,0 +1,8 @@
+.message {
+  max-width: 325px;
+  text-align: center;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

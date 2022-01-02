@@ -1,0 +1,12 @@
+.store__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+@media (max-width: 800px) {
+  .store__header {
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+}
