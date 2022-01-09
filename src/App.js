@@ -50,14 +50,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // получить кол-во страниц
-    api
-      .getInitialItems("items")
-      .then((response) => {
-        const totalCountItems = response.length;
-        setTotalPages(getPagesCount(totalCountItems, limit));
-      })
-      .catch((error) => console.log(error));
+    setTotalPages(getPagesCount(100, limit));
   }, []);
 
   useEffect(() => {
@@ -206,7 +199,7 @@ function App() {
               isImagePopupOpened={isImagePopupOpened}
               selectedCard={selectedCard}
               closeImagePopup={closeImagePopup}
-            ></PopupWithImage>
+            />
             <SetItemsContext.Provider value={{ setCartItems: setCartItems }}>
               <Cart
                 cartItems={cartItems}
