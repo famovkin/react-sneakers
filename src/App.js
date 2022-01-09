@@ -14,6 +14,8 @@ import { api } from "./utils/Api";
 import { getPagesCount } from "./utils/pages";
 import Select from "./components/UI/Select";
 import PopupWithImage from "./components/PopupWithImage";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Register from "./pages/Register";
 
 function App() {
   const [items, setItems] = useState([]);
@@ -208,51 +210,46 @@ function App() {
                 isCartOpened={isCartOpened}
               />
             </SetItemsContext.Provider>
-            {isAuth ? (
-              <Switch>
-                <Route path="/" exact>
-                  <Home
-                    searchQuery={searchQuery}
-                    setSearchQuery={setSearchQuery}
-                    searchedCards={searchedCards}
-                    onAddToCart={onAddToCart}
-                    onAddToFavorites={onAddToFavorites}
-                    onOpenCart={cartOpenHandler}
-                    isLoading={isLoading}
-                    cardsCount={items.length}
-                  >
-                    <Select
-                      value={selectedSort}
-                      onChange={sortItems}
-                      defaultValue="Сортировка"
-                      options={[
-                        { value: "descending", name: "По убыванию" },
-                        { value: "ascending", name: "По возрастанию" },
-                      ]}
-                    ></Select>
-                  </Home>
-                </Route>
-                <Route path="/favorites">
-                  <Favorites
-                    onAddToCart={onAddToCart}
-                    onAddToFavorites={onAddToFavorites}
-                    onOpenCart={cartOpenHandler}
-                  />
-                </Route>
-                <Route path="/orders">
-                  <Orders onOpenCart={cartOpenHandler} />
-                </Route>
-                <Redirect to="/" />
-              </Switch>
-            ) : (
-              <Switch>
-                <Route path="/login">
-                  <Login />
-                </Route>
-                <Redirect to="/login" />
-              </Switch>
-            )}
-            <div ref={lastElement}></div>
+            <Switch>
+              <ProtectedRoute
+                component={Home}
+                isAuth={isAuth}
+                path="/"
+                exact
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+                searchedCards={searchedCards}
+                onAddToCart={onAddToCart}
+                onAddToFavorites={onAddToFavorites}
+                onOpenCart={cartOpenHandler}
+                isLoading={isLoading}
+                cardsCount={items.length}
+                selectedSort={selectedSort}
+                sortItems={sortItems}
+              />
+              <ProtectedRoute
+                component={Favorites}
+                isAuth={isAuth}
+                path="/favorites"
+                onAddToCart={onAddToCart}
+                onAddToFavorites={onAddToFavorites}
+                onOpenCart={cartOpenHandler}
+              />
+              <ProtectedRoute
+                component={Orders}
+                isAuth={isAuth}
+                path="/orders"
+                onOpenCart={cartOpenHandler}
+              />
+              <Route path="/sign-in">
+                <Login />
+              </Route>
+              <Route path="/sign-up">
+                <Register />
+              </Route>
+              <Redirect to="/sign-in" />
+            </Switch>
+            )<div ref={lastElement}></div>
           </div>
         </ItemsContext.Provider>
       </PopupsContext.Provider>

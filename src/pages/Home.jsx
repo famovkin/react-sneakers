@@ -4,6 +4,7 @@ import CardSearch from "../components/CardSearch";
 import Header from "../components/Header";
 import Message from "../components/Message";
 import { createEmptyArray, getRandomNumber } from "../utils/pages";
+import Select from "../components/UI/Select";
 
 function Home({
   searchQuery,
@@ -13,8 +14,9 @@ function Home({
   onAddToFavorites,
   onOpenCart,
   isLoading,
-  children,
   cardsCount,
+  selectedSort,
+  sortItems,
 }) {
   const [numberForEmoji, setNumberForEmoji] = useState(1);
 
@@ -32,7 +34,15 @@ function Home({
             {searchQuery ? `Поиск по: ${searchQuery}` : "Все кроссовки"}
           </h2>
           <CardSearch search={searchQuery} setSearch={setSearchQuery} />
-          {children}
+          <Select
+            value={selectedSort}
+            onChange={sortItems}
+            defaultValue="Сортировка"
+            options={[
+              { value: "descending", name: "По убыванию" },
+              { value: "ascending", name: "По возрастанию" },
+            ]}
+          />
         </div>
         {searchedCards.length === 0 && searchQuery ? (
           <Message
