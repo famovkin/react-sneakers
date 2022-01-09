@@ -19,3 +19,20 @@ export const register = (password, email) => {
     }),
   }).then((res) => checkServerResponse(res));
 };
+
+export const authorize = (password, email) => {
+  return fetch(`${BASE_URL}/signin`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ password: password, email: email }),
+  })
+    .then((res) => checkServerResponse(res))
+    .then((data) => {
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        return data;
+      }
+    });
+};

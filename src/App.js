@@ -195,6 +195,22 @@ function App() {
       });
   }
 
+  function loginUser(password, email, setEmail, setPassword) {
+    auth
+      .authorize(password, email)
+      .then((data) => {
+        if (data.token) {
+          setEmail("");
+          setPassword("");
+          setIsAuth(true);
+          history.push("/");
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+
   return (
     <AuthContext.Provider value={{ isAuth: isAuth, setIsAuth: setIsAuth }}>
       <PopupsContext.Provider
@@ -258,7 +274,7 @@ function App() {
                 onOpenCart={cartOpenHandler}
               />
               <Route path="/sign-in">
-                <Login />
+                <Login onSubmit={loginUser} />
               </Route>
               <Route path="/sign-up">
                 <Register onSubmit={registerUser} />
