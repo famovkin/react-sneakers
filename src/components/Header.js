@@ -8,13 +8,13 @@ import profile from "../images/profile.svg";
 import { AuthContext } from "../contexts/AuthContext";
 import { useCheckout } from "../hooks/useCheckout";
 
-function Header({ onOpenCart }) {
+function Header({ onOpenCart, email }) {
   const { setIsAuth } = useContext(AuthContext);
   const { itemsPrice } = useCheckout();
 
   const logout = () => {
     setIsAuth(false);
-    localStorage.removeItem("auth");
+    localStorage.removeItem("token");
   };
 
   return (
@@ -54,6 +54,7 @@ function Header({ onOpenCart }) {
           </li>
         </ul>
       </div>
+      <p className="header__email">{email}</p>
     </header>
   );
 }

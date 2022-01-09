@@ -31,6 +31,7 @@ function App() {
   const [selectedSort, setSelectedSort] = useState("");
   const [isImagePopupOpened, setIsImagePopupOpened] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
+  const [email, setEmail] = useState("");
 
   const lastElement = useRef();
   const observer = useRef();
@@ -47,10 +48,18 @@ function App() {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("auth")) {
-      setIsAuth(true);
+    if (localStorage.getItem("token")) {
+      const token = localStorage.getItem("token");
+      auth
+        .getContent(token)
+        .then((res) => {
+          setIsAuth(true);
+          setEmail(res.data.email);
+          history.push("/");
+        })
+        .catch((error) => console.log(error));
     }
-  }, []);
+  }, [history, isAuth]);
 
   useEffect(() => {
     setTotalPages(getPagesCount(100, limit));
@@ -190,8 +199,8 @@ function App() {
           console.log("Что-то пошло не так");
         }
       })
-      .catch((e) => {
-        console.log(e);
+      .catch((error) => {
+        console.log(error);
       });
   }
 
@@ -206,8 +215,8 @@ function App() {
           history.push("/");
         }
       })
-      .catch((e) => {
-        console.log(e);
+      .catch((error) => {
+        console.log(error);
       });
   }
 
@@ -258,6 +267,7 @@ function App() {
                 cardsCount={items.length}
                 selectedSort={selectedSort}
                 sortItems={sortItems}
+                email={email}
               />
               <ProtectedRoute
                 component={Favorites}
@@ -266,12 +276,14 @@ function App() {
                 onAddToCart={onAddToCart}
                 onAddToFavorites={onAddToFavorites}
                 onOpenCart={cartOpenHandler}
+                email={email}
               />
               <ProtectedRoute
                 component={Orders}
                 isAuth={isAuth}
                 path="/orders"
                 onOpenCart={cartOpenHandler}
+                email={email}
               />
               <Route path="/sign-in">
                 <Login onSubmit={loginUser} />

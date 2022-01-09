@@ -5,7 +5,7 @@ import Message from "../components/Message";
 import { ItemsContext } from "../contexts/ItemsContext";
 import { getRandomNumber } from "../utils/pages";
 
-function Favorites({ onAddToCart, onAddToFavorites, onOpenCart }) {
+function Favorites({ onAddToCart, onAddToFavorites, onOpenCart, email }) {
   const state = useContext(ItemsContext);
   const [numberForEmoji, setNumberForEmoji] = useState(1);
 
@@ -15,7 +15,7 @@ function Favorites({ onAddToCart, onAddToFavorites, onOpenCart }) {
 
   return (
     <div className="page__wrapper">
-      <Header onOpenCart={onOpenCart} />
+      <Header onOpenCart={onOpenCart} email={email}/>
       <section className="store">
         <div className="store__header">
           <h2 className="store__title">Мои закладки</h2>

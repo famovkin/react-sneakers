@@ -12,12 +12,6 @@
 @media (max-width: 800px) {
   .header__account {
     width: 100%;
-    justify-content: space-around;
-  }
-}
-
-@media (max-width: 500px) {
-  .header__account {
     justify-content: space-between;
   }
 }

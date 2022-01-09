@@ -5,7 +5,7 @@ import Message from "../components/Message";
 import { api } from "../utils/Api";
 import { createEmptyArray, getRandomNumber } from "../utils/pages";
 
-function Orders({ onOpenCart }) {
+function Orders({ onOpenCart, email }) {
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [numberForEmoji, setNumberForEmoji] = useState(1);
@@ -32,7 +32,7 @@ function Orders({ onOpenCart }) {
 
   return (
     <div className="page__wrapper">
-      <Header onOpenCart={onOpenCart} />
+      <Header onOpenCart={onOpenCart} email={email} />
       <section className="store">
         <div className="store__header">
           <h2 className="store__title">Мои заказы</h2>

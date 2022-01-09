@@ -13,6 +13,7 @@
 @import url(./blocks/header/__price/header__price.css);
 @import url(./blocks/header/__cart-image/header__cart-image.css);
 @import url(./blocks/header/__icon/header__icon.css);
+@import url(./blocks/header/__email/header__email.css);
 
 @import url(./blocks/logo/logo.css);
 @import url(./blocks/logo/_type/logo_type_login.css);
