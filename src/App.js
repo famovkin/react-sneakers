@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState, useRef } from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 import "./App.css";
 import Cart from "./components/Cart";
 import { AuthContext } from "./contexts/AuthContext";
@@ -12,10 +12,10 @@ import Login from "./pages/Login";
 import Orders from "./pages/Orders";
 import { api } from "./utils/Api";
 import { getPagesCount } from "./utils/pages";
-import Select from "./components/UI/Select";
 import PopupWithImage from "./components/PopupWithImage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Register from "./pages/Register";
+import * as auth from "./utils/auth";
 
 function App() {
   const [items, setItems] = useState([]);
@@ -34,6 +34,7 @@ function App() {
 
   const lastElement = useRef();
   const observer = useRef();
+  const history = useHistory();
 
   const openImagePopup = (card) => {
     setIsImagePopupOpened(true);
@@ -179,6 +180,21 @@ function App() {
     }
   };
 
+  function registerUser(password, email) {
+    auth
+      .register(password, email)
+      .then((res) => {
+        if (res) {
+          history.push("/sign-in");
+        } else {
+          console.log("Что-то пошло не так");
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+
   return (
     <AuthContext.Provider value={{ isAuth: isAuth, setIsAuth: setIsAuth }}>
       <PopupsContext.Provider
@@ -245,7 +261,7 @@ function App() {
                 <Login />
               </Route>
               <Route path="/sign-up">
-                <Register />
+                <Register onSubmit={registerUser} />
               </Route>
               <Redirect to="/sign-in" />
             </Switch>
