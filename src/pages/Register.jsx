@@ -4,7 +4,7 @@ import InputWithError from "../components/UI/InputWithError";
 import logo from "../images/logo.png";
 import useFormAndValidation from "../hooks/useFormAndValidation";
 
-function Register({ onSubmit }) {
+function Register({ isLoading, onSubmit }) {
   const {
     handleChange,
     values,
@@ -75,7 +75,7 @@ function Register({ onSubmit }) {
           }`}
           disabled={!isFormValid}
         >
-          Создать аккаунт
+          {isLoading ? "Загрузка..." : "Создать аккаунт"}
         </button>
         <p className="login__text">
           Уже зарегистрированы?{" "}

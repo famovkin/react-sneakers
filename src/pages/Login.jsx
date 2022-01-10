@@ -4,7 +4,7 @@ import logo from "../images/logo.png";
 import { Link } from "react-router-dom";
 import useFormAndValidation from "../hooks/useFormAndValidation";
 
-function Login({ onSubmit }) {
+function Login({ onSubmit, isLoading }) {
   const { handleChange, values, errors, isFormValid, resetForm } =
     useFormAndValidation();
 
@@ -49,7 +49,7 @@ function Login({ onSubmit }) {
           }`}
           disabled={!isFormValid}
         >
-          Войти
+          {isLoading ? "Загрузка..." : "Войти"}
         </button>
         <p className="login__text">
           Нет аккаунта?{" "}

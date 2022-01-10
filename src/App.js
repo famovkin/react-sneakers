@@ -24,6 +24,7 @@ function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isCartOpened, setIsCartOpened] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isFormLoading, setIsFormLoading] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
   const [totalPages, setTotalPages] = useState(0);
   const [limit, setLimit] = useState(16);
@@ -190,6 +191,7 @@ function App() {
   };
 
   function registerUser(password, email, resetForm) {
+    setIsFormLoading(true);
     auth
       .register(password, email)
       .then((res) => {
@@ -202,10 +204,14 @@ function App() {
       })
       .catch((error) => {
         console.log(error);
+      })
+      .finally(() => {
+        setIsFormLoading(false);
       });
   }
 
   function loginUser(password, email, resetForm) {
+    setIsFormLoading(true);
     auth
       .authorize(password, email)
       .then((data) => {
@@ -217,6 +223,9 @@ function App() {
       })
       .catch((error) => {
         console.log(error);
+      })
+      .finally(() => {
+        setIsFormLoading(false);
       });
   }
 
@@ -286,10 +295,10 @@ function App() {
                 email={email}
               />
               <Route path="/sign-in">
-                <Login onSubmit={loginUser} />
+                <Login isLoading={isFormLoading} onSubmit={loginUser} />
               </Route>
               <Route path="/sign-up">
-                <Register onSubmit={registerUser} />
+                <Register isLoading={isFormLoading} onSubmit={registerUser} />
               </Route>
               <Redirect to="/sign-in" />
             </Switch>
