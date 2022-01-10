@@ -84,7 +84,7 @@ function App() {
   }, [page]);
 
   useEffect(() => {
-    if (isLoading) return;
+    if (isLoading || !isAuth) return;
     if (observer.current) observer.current.disconnect();
     var callback = function (entries, observer) {
       if (entries[0].isIntersecting && page < totalPages) {
@@ -93,7 +93,7 @@ function App() {
     };
     observer.current = new IntersectionObserver(callback);
     observer.current.observe(lastElement.current);
-  }, [isLoading]);
+  }, [isLoading, isAuth]);
 
   useEffect(() => {
     setIsLoading(true);

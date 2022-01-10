@@ -3,7 +3,7 @@ export const getPagesCount = (totalCountItems, limit) => {
 };
 
 export const createEmptyArray = (number) => {
-  let resultArray = [];
+  const resultArray = [];
   for (let i = 0; i < number; i++) {
     resultArray.push({});
   }
