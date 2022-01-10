@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import cart from "../images/cart.svg";
 import favorite from "../images/favorite.svg";
 import logo from "../images/logo.png";
@@ -20,7 +20,7 @@ function Header({ onOpenCart, email }) {
   return (
     <header className="header">
       <div className="header__content">
-        <Link to="/">
+        <NavLink exact to="/">
           <div className="header__logo">
             <img className="logo" src={logo} alt="Кроссовки" />
             <div className="header__logo-text">
@@ -28,22 +28,22 @@ function Header({ onOpenCart, email }) {
               <p className="header__subtitle">Магазин лучших кроссовок</p>
             </div>
           </div>
-        </Link>
+        </NavLink>
         <ul className="header__account">
           <li onClick={onOpenCart} className="header__cart">
             <img className="header__cart-image" src={cart} alt="Корзина" />
             <span className="header__price">{itemsPrice} руб.</span>
           </li>
-          <Link to="/orders">
+          <NavLink to="/orders" activeClassName="header__link_active">
             <li>
               <img className="header__icon" src={profile} atl="Человек" />
             </li>
-          </Link>
-          <Link to="/favorites">
+          </NavLink>
+          <NavLink to="/favorites" activeClassName="header__link_active">
             <li>
               <img className="header__icon" src={favorite} alt="Сердце" />
             </li>
-          </Link>
+          </NavLink>
           <li>
             <img
               onClick={logout}

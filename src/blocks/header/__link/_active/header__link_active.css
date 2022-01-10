@@ -1,0 +1,4 @@
+.header__link_active {
+  filter: invert(0%) sepia(20%) saturate(1300%) hue-rotate(100deg)
+    brightness(100%) contrast(100%);
+}

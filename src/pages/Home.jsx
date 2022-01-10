@@ -24,6 +24,7 @@ function Home({
   useEffect(() => {
     setNumberForEmoji(getRandomNumber(1, 10));
   }, [searchQuery]);
+
   const emptyArray = createEmptyArray(cardsCount);
 
   return (
