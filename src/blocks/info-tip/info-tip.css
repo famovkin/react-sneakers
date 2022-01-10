@@ -1,6 +1,12 @@
 .info-tip {
-    width: 320px;
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
+  width: 320px;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+@media (max-width: 400px) {
+  .info-tip {
+    width: calc(100% - 80px);
+  }
 }

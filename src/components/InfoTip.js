@@ -3,14 +3,12 @@ import Button from "./UI/Button";
 import success from "../images/success.png";
 import failure from "../images/failure.png";
 
-function InfoTip({
-  isOpen,
-  message = "Поздравляем! Ваш аккаунт зарегистрирован",
-  isSuccess,
-  closeInfoTip,
-}) {
+function InfoTip({ isOpen, message, isSuccess, closeInfoTip }) {
   return (
-    <div onClick={closeInfoTip} className={`popup ${isOpen && "popup_opened"}`}>
+    <div
+      onClick={closeInfoTip}
+      className={`popup ${isOpen ? "popup_opened" : ""}`}
+    >
       <div onClick={(event) => event.stopPropagation()} className="info-tip">
         <div
           className={`info-tip__color-part info-tip__color-part_type_${

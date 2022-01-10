@@ -5,7 +5,7 @@ function PopupWithImage(props) {
   return (
     <div
       onClick={props.closeImagePopup}
-      className={`popup ${props.isImagePopupOpened && "popup_opened"}`}
+      className={`popup ${props.isImagePopupOpened ? "popup_opened" : ""}`}
     >
       <div
         onClick={(event) => {
@@ -15,7 +15,11 @@ function PopupWithImage(props) {
       >
         <img
           className="popup__image"
-          src={props.selectedCard.imgUrl ? process.env.PUBLIC_URL + props.selectedCard.imgUrl : ""}
+          src={
+            props.selectedCard.imgUrl
+              ? process.env.PUBLIC_URL + props.selectedCard.imgUrl
+              : ""
+          }
           alt={props.selectedCard.title}
         />
         <p className="popup__title">{props.selectedCard.title}</p>

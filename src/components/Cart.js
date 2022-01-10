@@ -45,7 +45,7 @@ function Cart({ cartItems, cartCloseHandler, onRemoveItem, isCartOpened }) {
   return (
     <div
       onClick={closeCart}
-      className={`cart ${isCartOpened && "cart_visible"}`}
+      className={`cart ${isCartOpened ? "cart_visible" : ""}`}
     >
       <div
         onClick={(event) => event.stopPropagation()}

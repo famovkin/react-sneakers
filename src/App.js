@@ -16,6 +16,8 @@ import PopupWithImage from "./components/PopupWithImage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Register from "./pages/Register";
 import * as auth from "./utils/auth";
+import InfoTip from "./components/InfoTip";
+import { sliceError } from "./utils/sliceError";
 
 function App() {
   const [items, setItems] = useState([]);
@@ -33,6 +35,9 @@ function App() {
   const [isImagePopupOpened, setIsImagePopupOpened] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
   const [email, setEmail] = useState("");
+  const [isInfoTipOpen, setIsInfoTipOpen] = useState(false);
+  const [infoTipStatus, setInfoTipStatus] = useState(false);
+  const [infoTipMessage, setInfoTipMessage] = useState("");
 
   const lastElement = useRef();
   const observer = useRef();
@@ -190,7 +195,13 @@ function App() {
     }
   };
 
-  function registerUser(password, email, resetForm) {
+  const showInfoTip = (isSuccess, message) => {
+    setIsInfoTipOpen(true);
+    setInfoTipStatus(isSuccess);
+    setInfoTipMessage(message);
+  };
+
+  const registerUser = (password, email, resetForm) => {
     setIsFormLoading(true);
     auth
       .register(password, email)
@@ -198,19 +209,22 @@ function App() {
         if (res) {
           resetForm();
           history.push("/sign-in");
+          showInfoTip(true, "Поздравляем! Ваш аккаунт зарегистрирован");
         } else {
-          console.log("Что-то пошло не так");
+          showInfoTip(false, "Что-то пошло не так");
         }
       })
       .catch((error) => {
         console.log(error);
+        const newError = sliceError(error, 7);
+        showInfoTip(false, newError);
       })
       .finally(() => {
         setIsFormLoading(false);
       });
-  }
+  };
 
-  function loginUser(password, email, resetForm) {
+  const loginUser = (password, email, resetForm) => {
     setIsFormLoading(true);
     auth
       .authorize(password, email)
@@ -222,12 +236,13 @@ function App() {
         }
       })
       .catch((error) => {
-        console.log(error);
+        const newError = sliceError(error, 7);
+        showInfoTip(false, newError);
       })
       .finally(() => {
         setIsFormLoading(false);
       });
-  }
+  };
 
   return (
     <AuthContext.Provider value={{ isAuth: isAuth, setIsAuth: setIsAuth }}>
@@ -251,6 +266,12 @@ function App() {
               isImagePopupOpened={isImagePopupOpened}
               selectedCard={selectedCard}
               closeImagePopup={closeImagePopup}
+            />
+            <InfoTip
+              isOpen={isInfoTipOpen}
+              message={infoTipMessage}
+              isSuccess={infoTipStatus}
+              closeInfoTip={() => setIsInfoTipOpen(false)}
             />
             <SetItemsContext.Provider value={{ setCartItems: setCartItems }}>
               <Cart
@@ -302,7 +323,7 @@ function App() {
               </Route>
               <Redirect to="/sign-in" />
             </Switch>
-            )<div ref={lastElement}></div>
+            <div ref={lastElement}></div>
           </div>
         </ItemsContext.Provider>
       </PopupsContext.Provider>
