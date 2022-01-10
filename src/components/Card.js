@@ -23,12 +23,7 @@ function Card({
   };
 
   const state = useContext(ItemsContext);
-  const {
-    isImagePopupOpened,
-    setIsImagePopupOpened,
-    openImagePopup,
-    closeImagePopup,
-  } = useContext(PopupsContext);
+  const { openImagePopup } = useContext(PopupsContext);
 
   return (
     <li className="card">
