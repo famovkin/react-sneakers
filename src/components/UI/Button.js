@@ -1,11 +1,12 @@
 import React from "react";
 
-function Button({ onClick, isLoading, children }) {
+function Button({ onClick, isLoading, children, modClass }) {
   return (
     <button
       disabled={isLoading}
       onClick={onClick}
-      className={`button ${isLoading && "button_disabled"}`}
+      className={`button ${isLoading && "button_disabled"} ${modClass}`}
+      disabled={isLoading}
     >
       {children}
     </button>

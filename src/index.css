@@ -63,6 +63,7 @@
 @import url(./blocks/button/button.css);
 @import url(./blocks/button/_type/button_type_login.css);
 @import url(./blocks/button/_type/button_type_disabled.css);
+@import url(./blocks/button/_type/button_type_error.css);
 @import url(./blocks/button/__left-arrow/button__left-arrow.css);
 @import url(./blocks/button/__right-arrow/button__right-arrow.css);
 @import url(./blocks/button/_disabled/button_disabled.css);
@@ -91,3 +92,12 @@
 @import url(./blocks/popup/_opened/popup_opened.css);
 @import url(./blocks/popup/__container/popup__container.css);
 @import url(./blocks/popup/__image/popup__image.css);
+
+@import url(./blocks/info-tip/info-tip.css);
+@import url(./blocks/info-tip/__color-part/info-tip__color-part.css);
+@import url(./blocks/info-tip/__color-part/_type/info-tip__color-part_type_failure.css);
+@import url(./blocks/info-tip/__color-part/_type/info-tip__color-part_type_success.css);
+@import url(./blocks/info-tip/__image/info-tip__image.css);
+@import url(./blocks/info-tip/__content/info-tip__content.css);
+@import url(./blocks/info-tip/__text/info-tip__text.css);
+@import url(./blocks/info-tip/__title/info-tip__title.css);

@@ -1,0 +1,11 @@
+.button_type_error {
+  background: #f44336;
+}
+
+.button_type_error:hover {
+  background: #fa2e1f;
+}
+
+.button_type_error:active {
+  background: #bf342a;
+}

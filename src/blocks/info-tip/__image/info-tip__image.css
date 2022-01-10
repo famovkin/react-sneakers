@@ -1,0 +1,5 @@
+.info-tip__image {
+    width: 70px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
