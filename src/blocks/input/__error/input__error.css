@@ -1,0 +1,10 @@
+.input__error {
+  min-height: 10px;
+  font-size: 11px;
+  color: red;
+  /* visibility: hidden; */
+}
+
+.input__error:last-of-type {
+  margin-bottom: 50px;
+}

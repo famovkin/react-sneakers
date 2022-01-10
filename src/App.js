@@ -189,11 +189,12 @@ function App() {
     }
   };
 
-  function registerUser(password, email) {
+  function registerUser(password, email, resetForm) {
     auth
       .register(password, email)
       .then((res) => {
         if (res) {
+          resetForm();
           history.push("/sign-in");
         } else {
           console.log("Что-то пошло не так");
@@ -204,13 +205,12 @@ function App() {
       });
   }
 
-  function loginUser(password, email, setEmail, setPassword) {
+  function loginUser(password, email, resetForm) {
     auth
       .authorize(password, email)
       .then((data) => {
         if (data.token) {
-          setEmail("");
-          setPassword("");
+          resetForm();
           setIsAuth(true);
           history.push("/");
         }

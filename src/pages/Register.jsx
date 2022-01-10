@@ -1,53 +1,82 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import Input from "../components/UI/Input";
+import InputWithError from "../components/UI/InputWithError";
 import logo from "../images/logo.png";
+import useFormAndValidation from "../hooks/useFormAndValidation";
 
 function Register({ onSubmit }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const {
+    handleChange,
+    values,
+    errors,
+    setErrors,
+    isFormValid,
+    setIsFormValid,
+    resetForm,
+  } = useFormAndValidation();
 
-  const onChangeEmail = (event) => setEmail(event.target.value);
-  const onChangePassword = (event) => setPassword(event.target.value);
-  const onChangeConfirmPass = (event) => setConfirmPassword(event.target.value);
+  useEffect(() => {
+    if (values["password"] !== values["confirmPass"]) {
+      setErrors({
+        ...errors,
+        ["confirmPass"]: "Пароли не совпадают",
+      });
+      setIsFormValid(false);
+    }
+  }, [isFormValid]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (password === confirmPassword) {
-      onSubmit(password, email);
-    } else {
-      console.log("Пароли НЕ совпадают");
-    }
+    onSubmit(values["password"], values["email"], resetForm);
   };
 
   return (
     <div className="login">
-      <form onSubmit={handleSubmit} className="login__form">
+      <form onSubmit={handleSubmit} className="login__form" noValidate>
         <img className="logo logo_type_login" src={logo} alt="Кроссовки" />
         <h1 className="login__title">Регистрация</h1>
-        <Input
-          value={email}
-          onChange={onChangeEmail}
+        <InputWithError
+          value={values["email"] || ""}
+          onChange={handleChange}
           type="email"
           placeholder="Почта"
+          name="email"
+          isInvalid={errors["email"] ? true : false}
+          errorText={errors["email"]}
           required
         />
-        <Input
-          value={password}
-          onChange={onChangePassword}
+        <InputWithError
+          value={values["password"] || ""}
+          onChange={handleChange}
           type="password"
           placeholder="Пароль"
+          name="password"
+          minLength="8"
+          maxLength="40"
+          isInvalid={errors["password"] ? true : false}
+          errorText={errors["password"]}
           required
         />
-        <Input
-          value={confirmPassword}
-          onChange={onChangeConfirmPass}
+        <InputWithError
+          value={values["confirmPass"] || ""}
+          onChange={handleChange}
           type="password"
           placeholder="Подтвердите пароль"
+          name="confirmPass"
+          minLength="8"
+          maxLength="40"
+          isInvalid={errors["confirmPass"] ? true : false}
+          errorText={errors["confirmPass"]}
           required
         />
-        <button className="button button_type_login">Создать аккаунт</button>
+        <button
+          className={`button button_type_login ${
+            isFormValid ? "" : "button_type_disabled"
+          }`}
+          disabled={!isFormValid}
+        >
+          Создать аккаунт
+        </button>
         <p className="login__text">
           Уже зарегистрированы?{" "}
           <Link className="login__link" to="/sign-in">
