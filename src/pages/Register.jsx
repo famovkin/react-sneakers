@@ -22,8 +22,10 @@ function Register({ isLoading, onSubmit }) {
         ["confirmPass"]: "Пароли не совпадают",
       });
       setIsFormValid(false);
+    } else {
+      setErrors({});
     }
-  }, [isFormValid]);
+  }, [isFormValid, values["confirmPass"]]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
