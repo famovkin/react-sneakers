@@ -18,6 +18,7 @@ import Register from "./pages/Register";
 import * as auth from "./utils/auth";
 import InfoTip from "./components/InfoTip";
 import { sliceError } from "./utils/sliceError";
+import { useScrollLock } from "./hooks/useScrollLock";
 
 function App() {
   const [items, setItems] = useState([]);
@@ -38,7 +39,7 @@ function App() {
   const [isInfoTipOpen, setIsInfoTipOpen] = useState(false);
   const [infoTipStatus, setInfoTipStatus] = useState(false);
   const [infoTipMessage, setInfoTipMessage] = useState("");
-
+  const { lockScroll, unlockScroll } = useScrollLock();
   const lastElement = useRef();
   const observer = useRef();
   const history = useHistory();
@@ -46,11 +47,13 @@ function App() {
   const openImagePopup = (card) => {
     setIsImagePopupOpened(true);
     setSelectedCard(card);
+    lockScroll();
   };
 
   const closeImagePopup = () => {
     setIsImagePopupOpened(false);
     setSelectedSort({});
+    unlockScroll();
   };
 
   useEffect(() => {
@@ -130,10 +133,12 @@ function App() {
 
   const cartOpenHandler = () => {
     setIsCartOpened(true);
+    lockScroll();
   };
 
   const cartCloseHandler = () => {
     setIsCartOpened(false);
+    unlockScroll();
   };
 
   const onAddToFavorites = (clickedCard) => {
