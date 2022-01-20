@@ -33,15 +33,15 @@ function App() {
   const [isCartOpened, setIsCartOpened] = useState(false);
   const [isImagePopupOpened, setIsImagePopupOpened] = useState(false);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // состояние загрузки карточек
   const [isFormLoading, setIsFormLoading] = useState(false);
 
   const [isAuth, setIsAuth] = useState(false);
 
   const [totalPages, setTotalPages] = useState(0);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(1); // текущая страница
 
-  const [selectedCard, setSelectedCard] = useState({});
+  const [selectedCard, setSelectedCard] = useState({}); // выбранная карточка при клике на фото
   const [email, setEmail] = useState("");
 
   const [isInfoTipOpen, setIsInfoTipOpen] = useState(false);
@@ -49,8 +49,8 @@ function App() {
   const [infoTipMessage, setInfoTipMessage] = useState("");
 
   const { lockScroll, unlockScroll } = useScrollLock();
-  const lastElement = useRef();
-  const observer = useRef();
+  const lastElement = useRef(); // скрытый дивчик, он нужен для бесконечной ленты
+  const observer = useRef(); // сохраняем observer
   const history = useHistory();
 
   const limit = 16; // количество карточек на странице
@@ -67,7 +67,7 @@ function App() {
     unlockScroll();
   };
 
-  useEffect(() => {
+  useEffect(() => { // проверка токена
     if (localStorage.getItem("token")) {
       const token = localStorage.getItem("token");
       auth
@@ -81,32 +81,31 @@ function App() {
     }
   }, [history, isAuth]);
 
-  useEffect(() => {
+  useEffect(() => { // подгрузка карточек
     setTotalPages(getPagesCount(100, limit));
     setIsLoading(true);
     api
       .getInitialItems("items", limit, page)
       .then((response) => setItems([...items, ...response]))
-      .finally(() =>
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 2000)
-      );
-  }, [page]);
+      .finally(() => setIsLoading(false));
+  }, [page]); // когда меняется страница, подгружаем новую порцию карточек
 
-  useEffect(() => {
+  useEffect(() => { // смена страниц при отображении lastElement
     if (isLoading || !isAuth) return;
     if (observer.current) observer.current.disconnect();
     var callback = function (entries, observer) {
+      // эта функция каждый раз будет срабатывать,
+      // когда в зоне видимости будет lastElement
       if (entries[0].isIntersecting && page < totalPages) {
+        // поле isIntersecting говорит в зоне видиости элемент или нет
         setPage(page + 1);
       }
     };
     observer.current = new IntersectionObserver(callback);
-    observer.current.observe(lastElement.current);
+    observer.current.observe(lastElement.current); // указываем за каким элементом мы следим
   }, [isLoading, isAuth]);
 
-  useEffect(() => {
+  useEffect(() => { // получаем данные с сервера
     setIsLoading(true);
     Promise.all([
       api.getInitialItems("items", limit, page),
@@ -133,7 +132,8 @@ function App() {
       .catch((error) => console.log(error));
   };
 
-  const searchedCards = useMemo(() => {
+  const searchedCards = useMemo(() => { // поиск кроссовок по названию
+    // сохраняем результат, чтобы он каждый раз не вычислялся
     return items.filter((card) =>
       card.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
@@ -230,6 +230,7 @@ function App() {
       .catch((error) => {
         console.log(error);
         const newError = sliceError(error, 7);
+        // обрезаем лишнее, так как ошибка прилетает с "Error: ..."
         showInfoTip(false, newError);
       })
       .finally(() => {
@@ -332,7 +333,7 @@ function App() {
           </Route>
           <Redirect to="/sign-in" />
         </Switch>
-        <div ref={lastElement}/>
+        <div ref={lastElement} />
       </div>
     </AppContext.Provider>
   );

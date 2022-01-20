@@ -4,7 +4,7 @@ import CardSearch from "../components/CardSearch";
 import Header from "../components/Header";
 import Message from "../components/Message";
 import Select from "../components/UI/Select";
-import { createEmptyArray, getRandomNumber } from "../utils/pages";
+import { createArrWithEmptyObjs, getRandomNumber } from "../utils/pages";
 
 function Home({
   searchQuery,
@@ -23,7 +23,7 @@ function Home({
 
   useEffect(() => setNumberForEmoji(getRandomNumber(1, 10)), [searchQuery]);
 
-  const emptyArray = createEmptyArray(cardsCount);
+  const arrayWithEmptyObjs = createArrWithEmptyObjs(cardsCount); // создаем массив из пустых объектов для загрузки
 
   return (
     <div className="page__wrapper">
@@ -57,7 +57,7 @@ function Home({
           />
         ) : (
           <CardList
-            cards={isLoading ? emptyArray : searchedCards}
+            cards={isLoading ? arrayWithEmptyObjs : searchedCards}
             onAddToCart={onAddToCart}
             onAddToFavorites={onAddToFavorites}
             isLoading={isLoading}

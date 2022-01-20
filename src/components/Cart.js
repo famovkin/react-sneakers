@@ -14,7 +14,7 @@ function Cart({ cartItems, cartCloseHandler, onRemoveItem, isCartOpened }) {
   const [orderId, setOrderId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const { setCartItems } = useContext(AppContext);
-  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms)); // функция задержки
   const { itemsPrice, shippingPrice, totalPrice } = useCheckout();
 
   const completeOrder = async () => {
@@ -30,10 +30,11 @@ function Cart({ cartItems, cartCloseHandler, onRemoveItem, isCartOpened }) {
       .catch((error) => console.log(error))
       .finally(() => setIsLoading(false));
 
-    for (let i = 0; i < cartItems.length; i++) {
+    for (let i = 0; i < cartItems.length; i++) { // костыль, так как у mocapi нет удаления всего массива
+      // поэтому удаляем по одному товару
       const item = cartItems[i];
       await api.removeItem(item.id, "cart");
-      await delay(700);
+      await delay(700); // добавляем задержку, чтобы api не забанил
     }
   };
 

@@ -3,7 +3,7 @@ import CardList from "../components/CardList";
 import Header from "../components/Header";
 import Message from "../components/Message";
 import { api } from "../utils/Api";
-import { createEmptyArray, getRandomNumber } from "../utils/pages";
+import { createArrWithEmptyObjs, getRandomNumber } from "../utils/pages";
 
 function Orders({ onOpenCart, email }) {
   const [orders, setOrders] = useState([]);
@@ -26,7 +26,7 @@ function Orders({ onOpenCart, email }) {
       );
   }, []);
 
-  const emptyArray = createEmptyArray(4);
+  const arrayWithEmptyObjs = createArrWithEmptyObjs(4); // создаем массив из пустых объектов для загрузки
 
   return (
     <div className="page__wrapper">
@@ -54,7 +54,7 @@ function Orders({ onOpenCart, email }) {
               {!isLoading ? `Заказ #${order.id}` : `Загрузка...`}
             </h3>
             <CardList
-              cards={isLoading ? emptyArray : order.items}
+              cards={isLoading ? arrayWithEmptyObjs : order.items}
               isLoading={isLoading}
             />
           </div>

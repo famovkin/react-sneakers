@@ -14,14 +14,12 @@ function Card({
   isLoading,
 }) {
   const cartHandler = () => onAddToCart(card);
-
   const favoriteHandler = () => onAddToFavorites(card);
-
   const { openImagePopup, favoriteItems, cartItems } = useContext(AppContext);
 
   return (
     <li className="card">
-      {isLoading ? (
+      {isLoading ? ( // отображаем скелетон, если в текущий момент идет загрузка
         <ContentLoader
           speed={1}
           width={200}
