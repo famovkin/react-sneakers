@@ -2,27 +2,25 @@ import React, { useContext, useEffect, useState } from "react";
 import Card from "../components/Card";
 import Header from "../components/Header";
 import Message from "../components/Message";
-import { ItemsContext } from "../contexts/ItemsContext";
+import { AppContext } from "../contexts/AppContext";
 import { getRandomNumber } from "../utils/pages";
 
 function Favorites({ onAddToCart, onAddToFavorites, onOpenCart, email }) {
-  const state = useContext(ItemsContext);
+  const { favoriteItems } = useContext(AppContext);
   const [numberForEmoji, setNumberForEmoji] = useState(1);
 
-  useEffect(() => {
-    setNumberForEmoji(getRandomNumber(1, 10));
-  }, []);
+  useEffect(() => setNumberForEmoji(getRandomNumber(1, 10)), []);
 
   return (
     <div className="page__wrapper">
-      <Header onOpenCart={onOpenCart} email={email}/>
+      <Header onOpenCart={onOpenCart} email={email} />
       <section className="store">
         <div className="store__header">
           <h2 className="store__title">Мои закладки</h2>
         </div>
         <ul className="cards-grid">
-          {state.favoriteItems.length ? (
-            state.favoriteItems.map((card) => (
+          {favoriteItems.length ? (
+            favoriteItems.map((card) => (
               <Card
                 key={card.id}
                 card={card}

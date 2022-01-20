@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
 import ContentLoader from "react-content-loader";
+import { AppContext } from "../contexts/AppContext";
 import plusAdded from "../images/button-added.svg";
 import plusDefault from "../images/button-plus.svg";
 import heartDefault from "../images/heart-default.svg";
 import heartLiked from "../images/heart-liked.svg";
-import { ItemsContext } from "../contexts/ItemsContext";
-import { PopupsContext } from "../contexts/PopupsContext";
 
 function Card({
   card,
@@ -14,16 +13,11 @@ function Card({
   isOnFavoritesPage = false,
   isLoading,
 }) {
-  const cartHandler = () => {
-    onAddToCart(card);
-  };
+  const cartHandler = () => onAddToCart(card);
 
-  const favoriteHandler = () => {
-    onAddToFavorites(card);
-  };
+  const favoriteHandler = () => onAddToFavorites(card);
 
-  const state = useContext(ItemsContext);
-  const { openImagePopup } = useContext(PopupsContext);
+  const { openImagePopup, favoriteItems, cartItems } = useContext(AppContext);
 
   return (
     <li className="card">
@@ -51,9 +45,7 @@ function Card({
                 className="card-button__image"
                 src={
                   (isOnFavoritesPage && heartLiked) ||
-                  state.favoriteItems.some(
-                    (item) => item.customId === card.customId
-                  )
+                  favoriteItems.some((item) => item.customId === card.customId)
                     ? heartLiked
                     : heartDefault
                 }
@@ -79,9 +71,7 @@ function Card({
                   onClick={cartHandler}
                   className="card-button__image"
                   src={
-                    state.cartItems.some(
-                      (item) => item.customId === card.customId
-                    )
+                    cartItems.some((item) => item.customId === card.customId)
                       ? plusAdded
                       : plusDefault
                   }

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { SetItemsContext } from "../contexts/SetItemsContext";
+import { AppContext } from "../contexts/AppContext";
 import { useCheckout } from "../hooks/useCheckout";
 import complete_order from "../images/complete-order.jpg";
 import empty_box from "../images/empty-box.jpg";
@@ -13,7 +13,7 @@ function Cart({ cartItems, cartCloseHandler, onRemoveItem, isCartOpened }) {
   const [isOrderCompleted, setIsOrderCompleted] = useState(false);
   const [orderId, setOrderId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const setState = useContext(SetItemsContext);
+  const { setCartItems } = useContext(AppContext);
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const { itemsPrice, shippingPrice, totalPrice } = useCheckout();
 
@@ -23,8 +23,8 @@ function Cart({ cartItems, cartCloseHandler, onRemoveItem, isCartOpened }) {
       .addOrder(cartItems)
       .then((response) => {
         setOrderId(response.id);
-        setState.setCartItems((prev) => [...prev, response]);
-        setState.setCartItems([]);
+        setCartItems((prev) => [...prev, response]);
+        setCartItems([]);
         setIsOrderCompleted(true);
       })
       .catch((error) => console.log(error))

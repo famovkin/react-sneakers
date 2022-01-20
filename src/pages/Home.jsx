@@ -3,8 +3,8 @@ import CardList from "../components/CardList";
 import CardSearch from "../components/CardSearch";
 import Header from "../components/Header";
 import Message from "../components/Message";
-import { createEmptyArray, getRandomNumber } from "../utils/pages";
 import Select from "../components/UI/Select";
+import { createEmptyArray, getRandomNumber } from "../utils/pages";
 
 function Home({
   searchQuery,
@@ -21,9 +21,7 @@ function Home({
 }) {
   const [numberForEmoji, setNumberForEmoji] = useState(1);
 
-  useEffect(() => {
-    setNumberForEmoji(getRandomNumber(1, 10));
-  }, [searchQuery]);
+  useEffect(() => setNumberForEmoji(getRandomNumber(1, 10)), [searchQuery]);
 
   const emptyArray = createEmptyArray(cardsCount);
 

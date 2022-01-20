@@ -26,8 +26,6 @@ function Orders({ onOpenCart, email }) {
       );
   }, []);
 
-  useEffect(() => {});
-
   const emptyArray = createEmptyArray(4);
 
   return (

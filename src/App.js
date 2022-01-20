@@ -1,48 +1,59 @@
 import React, { useEffect, useMemo, useState, useRef } from "react";
 import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 import "./App.css";
-import Cart from "./components/Cart";
-import { AuthContext } from "./contexts/AuthContext";
-import { ItemsContext } from "./contexts/ItemsContext";
-import { SetItemsContext } from "./contexts/SetItemsContext";
-import { PopupsContext } from "./contexts/PopupsContext";
-import Favorites from "./pages/Favorites";
+
 import Home from "./pages/Home";
-import Login from "./pages/Login";
+import Favorites from "./pages/Favorites";
 import Orders from "./pages/Orders";
-import { api } from "./utils/Api";
-import { getPagesCount } from "./utils/pages";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+
+import Cart from "./components/Cart";
 import PopupWithImage from "./components/PopupWithImage";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Register from "./pages/Register";
-import * as auth from "./utils/auth";
 import InfoTip from "./components/InfoTip";
+
+import { api } from "./utils/Api";
+import { getPagesCount } from "./utils/pages";
 import { sliceError } from "./utils/sliceError";
+import * as auth from "./utils/auth";
+
 import { useScrollLock } from "./hooks/useScrollLock";
+
+import { AppContext } from "./contexts/AppContext";
 
 function App() {
   const [items, setItems] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [favoriteItems, setFavoriteItems] = useState([]);
+
   const [searchQuery, setSearchQuery] = useState("");
-  const [isCartOpened, setIsCartOpened] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isFormLoading, setIsFormLoading] = useState(false);
-  const [isAuth, setIsAuth] = useState(false);
-  const [totalPages, setTotalPages] = useState(0);
-  const [limit, setLimit] = useState(16);
-  const [page, setPage] = useState(1);
   const [selectedSort, setSelectedSort] = useState("");
+
+  const [isCartOpened, setIsCartOpened] = useState(false);
   const [isImagePopupOpened, setIsImagePopupOpened] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [isFormLoading, setIsFormLoading] = useState(false);
+
+  const [isAuth, setIsAuth] = useState(false);
+
+  const [totalPages, setTotalPages] = useState(0);
+  const [page, setPage] = useState(1);
+
   const [selectedCard, setSelectedCard] = useState({});
   const [email, setEmail] = useState("");
+
   const [isInfoTipOpen, setIsInfoTipOpen] = useState(false);
   const [infoTipStatus, setInfoTipStatus] = useState(false);
   const [infoTipMessage, setInfoTipMessage] = useState("");
+
   const { lockScroll, unlockScroll } = useScrollLock();
   const lastElement = useRef();
   const observer = useRef();
   const history = useHistory();
+
+  const limit = 16; // количество карточек на странице
 
   const openImagePopup = (card) => {
     setIsImagePopupOpened(true);
@@ -72,9 +83,6 @@ function App() {
 
   useEffect(() => {
     setTotalPages(getPagesCount(100, limit));
-  }, []);
-
-  useEffect(() => {
     setIsLoading(true);
     api
       .getInitialItems("items", limit, page)
@@ -250,89 +258,83 @@ function App() {
   };
 
   return (
-    <AuthContext.Provider value={{ isAuth: isAuth, setIsAuth: setIsAuth }}>
-      <PopupsContext.Provider
-        value={{
-          isImagePopupOpened: isImagePopupOpened,
-          setIsImagePopupOpened: setIsImagePopupOpened,
-          openImagePopup: openImagePopup,
-          closeImagePopup: closeImagePopup,
-        }}
-      >
-        <ItemsContext.Provider
-          value={{
-            items: items,
-            cartItems: cartItems,
-            favoriteItems: favoriteItems,
-          }}
-        >
-          <div className="page">
-            <PopupWithImage
-              isImagePopupOpened={isImagePopupOpened}
-              selectedCard={selectedCard}
-              closeImagePopup={closeImagePopup}
-            />
-            <InfoTip
-              isOpen={isInfoTipOpen}
-              message={infoTipMessage}
-              isSuccess={infoTipStatus}
-              closeInfoTip={() => setIsInfoTipOpen(false)}
-            />
-            <SetItemsContext.Provider value={{ setCartItems: setCartItems }}>
-              <Cart
-                cartItems={cartItems}
-                cartCloseHandler={cartCloseHandler}
-                onRemoveItem={removeFromCartHandler}
-                isCartOpened={isCartOpened}
-              />
-            </SetItemsContext.Provider>
-            <Switch>
-              <ProtectedRoute
-                component={Home}
-                isAuth={isAuth}
-                path="/"
-                exact
-                searchQuery={searchQuery}
-                setSearchQuery={setSearchQuery}
-                searchedCards={searchedCards}
-                onAddToCart={onAddToCart}
-                onAddToFavorites={onAddToFavorites}
-                onOpenCart={cartOpenHandler}
-                isLoading={isLoading}
-                cardsCount={items.length}
-                selectedSort={selectedSort}
-                sortItems={sortItems}
-                email={email}
-              />
-              <ProtectedRoute
-                component={Favorites}
-                isAuth={isAuth}
-                path="/favorites"
-                onAddToCart={onAddToCart}
-                onAddToFavorites={onAddToFavorites}
-                onOpenCart={cartOpenHandler}
-                email={email}
-              />
-              <ProtectedRoute
-                component={Orders}
-                isAuth={isAuth}
-                path="/orders"
-                onOpenCart={cartOpenHandler}
-                email={email}
-              />
-              <Route path="/sign-in">
-                <Login isLoading={isFormLoading} onSubmit={loginUser} />
-              </Route>
-              <Route path="/sign-up">
-                <Register isLoading={isFormLoading} onSubmit={registerUser} />
-              </Route>
-              <Redirect to="/sign-in" />
-            </Switch>
-            <div ref={lastElement}></div>
-          </div>
-        </ItemsContext.Provider>
-      </PopupsContext.Provider>
-    </AuthContext.Provider>
+    <AppContext.Provider
+      value={{
+        isAuth,
+        setIsAuth,
+        isImagePopupOpened,
+        setIsImagePopupOpened,
+        openImagePopup,
+        closeImagePopup,
+        items,
+        cartItems,
+        favoriteItems,
+        setCartItems,
+      }}
+    >
+      <div className="page">
+        <PopupWithImage
+          isImagePopupOpened={isImagePopupOpened}
+          selectedCard={selectedCard}
+          closeImagePopup={closeImagePopup}
+        />
+        <InfoTip
+          isOpen={isInfoTipOpen}
+          message={infoTipMessage}
+          isSuccess={infoTipStatus}
+          closeInfoTip={() => setIsInfoTipOpen(false)}
+        />
+        <Cart
+          cartItems={cartItems}
+          cartCloseHandler={cartCloseHandler}
+          onRemoveItem={removeFromCartHandler}
+          isCartOpened={isCartOpened}
+        />
+        <Switch>
+          <ProtectedRoute
+            component={Home}
+            isAuth={isAuth}
+            path="/"
+            exact
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            searchedCards={searchedCards}
+            onAddToCart={onAddToCart}
+            onAddToFavorites={onAddToFavorites}
+            onOpenCart={cartOpenHandler}
+            isLoading={isLoading}
+            cardsCount={items.length}
+            selectedSort={selectedSort}
+            sortItems={sortItems}
+            email={email}
+          />
+          <ProtectedRoute
+            component={Favorites}
+            isAuth={isAuth}
+            path="/favorites"
+            onAddToCart={onAddToCart}
+            onAddToFavorites={onAddToFavorites}
+            onOpenCart={cartOpenHandler}
+            email={email}
+          />
+          <ProtectedRoute
+            component={Orders}
+            isAuth={isAuth}
+            path="/orders"
+            onOpenCart={cartOpenHandler}
+            email={email}
+          />
+          <Route path="/sign-in">
+            <Login isLoading={isFormLoading} onSubmit={loginUser} />
+          </Route>
+          <Route path="/sign-up">
+            <Register isLoading={isFormLoading} onSubmit={registerUser} />
+          </Route>
+          <Redirect to="/sign-in" />
+        </Switch>
+        <div ref={lastElement}/>
+      </div>
+    </AppContext.Provider>
   );
 }
 

@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AppContext } from "../contexts/AppContext";
+import { useCheckout } from "../hooks/useCheckout";
 import cart from "../images/cart.svg";
+import exit from "../images/exit.svg";
 import favorite from "../images/favorite.svg";
 import logo from "../images/logo.png";
-import exit from "../images/exit.svg";
 import profile from "../images/profile.svg";
-import { AuthContext } from "../contexts/AuthContext";
-import { useCheckout } from "../hooks/useCheckout";
 
 function Header({ onOpenCart, email }) {
-  const { setIsAuth } = useContext(AuthContext);
+  const { setIsAuth } = useContext(AppContext);
   const { itemsPrice } = useCheckout();
 
   const logout = () => {

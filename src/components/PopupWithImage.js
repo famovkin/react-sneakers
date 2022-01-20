@@ -8,9 +8,7 @@ function PopupWithImage(props) {
       className={`popup ${props.isImagePopupOpened ? "popup_opened" : ""}`}
     >
       <div
-        onClick={(event) => {
-          event.stopPropagation();
-        }}
+        onClick={(event) => event.stopPropagation()}
         className="popup__container"
       >
         <img
