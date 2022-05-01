@@ -73,6 +73,7 @@ function Card({
                       ? plusAdded
                       : plusDefault
                   }
+                  alt="Плюс"
                 />
               )}
             </button>

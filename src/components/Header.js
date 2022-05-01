@@ -36,7 +36,7 @@ function Header({ onOpenCart, email }) {
           </li>
           <NavLink to="/orders" activeClassName="header__link_active">
             <li>
-              <img className="header__icon" src={profile} atl="Человек" />
+              <img className="header__icon" src={profile} alt="Человек" />
             </li>
           </NavLink>
           <NavLink to="/favorites" activeClassName="header__link_active">
