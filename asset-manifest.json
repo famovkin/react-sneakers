@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/react-sneakers/static/css/main.4d3fd2c4.css",
-    "main.js": "/react-sneakers/static/js/main.c6be60d0.js",
+    "main.js": "/react-sneakers/static/js/main.350a7e63.js",
     "static/media/Inter-Black.woff2": "/react-sneakers/static/media/Inter-Black.141c7af6ed109b318513.woff2",
     "static/media/Inter-Medium.woff2": "/react-sneakers/static/media/Inter-Medium.6db7e439cc4b0e5c0cd2.woff2",
     "static/media/Inter-Regular.woff2": "/react-sneakers/static/media/Inter-Regular.4c96ed73beaf6d1e6cc7.woff2",
@@ -15,18 +15,18 @@
     "static/media/remove-button-colored.svg": "/react-sneakers/static/media/remove-button-colored.e909f43442d1e9adf35f35e993be85f3.svg",
     "static/media/profile.svg": "/react-sneakers/static/media/profile.381202f7e3edbc1a00b14fbd5e529a32.svg",
     "static/media/cart.svg": "/react-sneakers/static/media/cart.5113b08fb682dc25f3856ef704a6c05d.svg",
+    "index.html": "/react-sneakers/index.html",
     "static/media/exit.svg": "/react-sneakers/static/media/exit.0daa653edefb8763e1ec81552a4cd668.svg",
     "static/media/search.svg": "/react-sneakers/static/media/search.48c52bf5d459537e27c07f88eb08c050.svg",
     "static/media/remove-button.svg": "/react-sneakers/static/media/remove-button.7238f6f58ca2a3490d5b3358a98b42ec.svg",
     "static/media/button-plus.svg": "/react-sneakers/static/media/button-plus.b88e94c67ea7ac0cfa69033241c96b8c.svg",
-    "index.html": "/react-sneakers/index.html",
     "static/media/right-arrow.svg": "/react-sneakers/static/media/right-arrow.fc3222511ec5a224a4abf3bbf4c2566f.svg",
     "static/media/left-arrow.svg": "/react-sneakers/static/media/left-arrow.ac63c7c4d2e44bfd03e9bc9511e2d9da.svg",
     "main.4d3fd2c4.css.map": "/react-sneakers/static/css/main.4d3fd2c4.css.map",
-    "main.c6be60d0.js.map": "/react-sneakers/static/js/main.c6be60d0.js.map"
+    "main.350a7e63.js.map": "/react-sneakers/static/js/main.350a7e63.js.map"
   },
   "entrypoints": [
     "static/css/main.4d3fd2c4.css",
-    "static/js/main.c6be60d0.js"
+    "static/js/main.350a7e63.js"
   ]
 }
